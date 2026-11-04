@@ -1388,3 +1388,4 @@ U0 Batch005_Destroy() { Batch004_Destroy(); }
 #include "runtime/Batch035Nbt.HC"
 #include "runtime/Batch035Ao.HC"
 #include "runtime/Batch035Stairs.HC"
+#include "runtime/Batch036Break.HC"

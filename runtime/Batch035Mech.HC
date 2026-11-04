@@ -286,7 +286,7 @@ Bool MC035_Save(MCApp028 *s,U8 *stage){I32 np=0,i,k=0;for(i=0;i<g35_paintN;i++)i
  for(i=0;i<nr;i++){MC35Reactor *r=&g35_react[i];I32 *w=(buf+28+np*MC35_PREC+i*MC35_RREC)(I32*);w[0]=r->x;w[1]=r->y;w[2]=r->z;w[3]=r->progress;w[4]=r->level;w[5]=r->init;w[6]=r->finished;}
  k=0;for(i=0;i<g35_fallN;i++){MC35Fall *f=&g35_fall[i];if(f->removed)continue;U8 *r=buf+28+np*MC35_PREC+nr*MC35_RREC+k*MC35_FREC;F32 *fv=r(F32*);I32 *w=r(I32*);fv[0]=f->x;fv[1]=f->y;fv[2]=f->z;fv[3]=f->my;w[4]=f->id;w[5]=f->meta;w[6]=f->time;k++;}
  h[4]=MC028_Hash(buf,size);MCString path;MCString_FromC(&path,stage);MC025_Append(&path,"/world035.dat");U0 *file=fopen(path.data,"wb");Bool ok=FALSE;if(file){ok=fwrite(buf,1,size,file)==size;if(fclose(file))ok=FALSE;}MCString_Destroy(&path);free(buf);return ok;}
-U0 MC035_Clear(){g35_camN=0;g35_camSel=-1;g35_shotCam=-1;g35_shooting=FALSE;g35_fallN=0;g35_landed=0;g35_paintN=0;g35_paintSel=-1;g35_throwN=0;g35_bitN=0;g35_reactN=0;g35_using=FALSE;g35_useTicks=0;g35_nightMode=FALSE;g35_shots=0;g35_mobHits=0;g35_pickups=0;}
+U0 MC035_Clear(){MC036_Clear();g35_camN=0;g35_camSel=-1;g35_shotCam=-1;g35_shooting=FALSE;g35_fallN=0;g35_landed=0;g35_paintN=0;g35_paintSel=-1;g35_throwN=0;g35_bitN=0;g35_reactN=0;g35_using=FALSE;g35_useTicks=0;g35_nightMode=FALSE;g35_shots=0;g35_mobHits=0;g35_pickups=0;}
 I32 MC35_Load(MCApp028 *s){MCString path;MCString_FromC(&path,s->activePath);MC025_Append(&path,"/world035.dat");U0 *file=fopen(path.data,"rb");MCString_Destroy(&path);if(!file)return 0;
  if(fseek(file,0,2)){fclose(file);return -1;}I64 size=ftell(file);if(size<24 || size>28+MC35_MAXPAINT*MC35_PREC+MC35_MAXREACT*MC35_RREC+MC35_MAXFALL*MC35_FREC){fclose(file);return -1;}rewind(file);U8 *buf=MC_Alloc(size);Bool ok=fread(buf,1,size,file)==size;fclose(file);if(!ok){free(buf);return -1;}
  I32 *h=buf(I32*);if(h[0]!=0x4435334D || h[1]<1 || h[1]>2 || h[2]<0 || h[2]>MC35_MAXPAINT || h[3]<0 || h[3]>MC35_MAXREACT){free(buf);return -1;}I32 hs=24,nf=0;if(h[1]==2){hs=28;if(size<28){free(buf);return -1;}nf=h[6];if(nf<0 || nf>MC35_MAXFALL){free(buf);return -1;}}if(size!=hs+h[2]*MC35_PREC+h[3]*MC35_RREC+nf*MC35_FREC){free(buf);return -1;}U32 expected=h[4];h[4]=0;if(MC028_Hash(buf,size)!=expected){free(buf);return -1;}
@@ -319,6 +319,7 @@ U0 MC35_DemoTick(MCApp028 *s){Player *p=MC35_P(s);if(p==NULL)return;MCBody023 *b
   if(mode=='h'){MC35_DHold(s,261,1);MC028_Give(s,262,8,0);MC35_DLook(s,0,0);}
   if(mode=='e'){g35_hp0=b->health;MC35_DSet(s,0,1,0,51);printf("DEMO035 env scene hp=%d\n",b->health);}}
  if(mode=='s')MC35_StairDemo(s,t);
+ if(mode=='k'){if(t==6){MC35_DSet(s,0,1,2,3);MC35_DSet(s,1,1,2,1);MC35_DSet(s,-1,1,2,18);MC35_DLook(s,0,30);}if(t>8 && t<200)s->leftDown=TRUE;if(t==40)printf("TEST036 particles=%d progress=%d\n",g36_n,(s->minecraft.survival.progress*100)(I32));}
  if(mode=='b'){if(t==10){MC35_DLook(s,0,0);MC35_StartBow(s);}if(t==35){printf("TEST035 bow-frame-at-full=%d\n",MC035_BowFrame());MC35_Release(s);}
   if(t==60){printf("TEST035 bow-hits=%d arrows-left=%d\n",g35_mobHits,MC028_Count(s,262));MC35_DLook(s,0,89);MC35_StartBow(s);}if(t==66)MC35_Release(s);
   if(t==120){printf("TEST035 arrow-pickup=%d arrows=%d\n",g35_pickups,MC028_Count(s,262));MC028_Give(s,332,4,0);MC35_DHold(s,332,4);MC35_DLook(s,30,5);MC035_UseHeld(s,Inventory_getSelected(&p->inventory));MC028_Give(s,344,16,0);MC35_DHold(s,344,16);}

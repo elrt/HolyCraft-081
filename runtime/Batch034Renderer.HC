@@ -29,18 +29,10 @@ U0 MC35_StemCross(TileRenderer *s,MCRenderTile027 *tile,I32 d,F32 a4,F32 a5,F32 
 	MC027_Vertex(s,((a4 + 0.5f))(F32) - 0.45f, a5 + 0.0f, ((a6 + 0.5f))(F32) - 0.45f, minX, maxY);
 	MC027_Vertex(s,((a4 + 0.5f))(F32) + 0.45f, a5 + 0.0f, ((a6 + 0.5f))(F32) + 0.45f, maxX, maxY);
 	MC027_Vertex(s,((a4 + 0.5f))(F32) + 0.45f, a5 + height, ((a6 + 0.5f))(F32) + 0.45f, maxX, minY);
-	MC027_Vertex(s,((a4 + 0.5f))(F32) + 0.45f, a5 + height, ((a6 + 0.5f))(F32) + 0.45f, minX, minY);
-	MC027_Vertex(s,((a4 + 0.5f))(F32) + 0.45f, a5 + 0.0f, ((a6 + 0.5f))(F32) + 0.45f, minX, maxY);
-	MC027_Vertex(s,((a4 + 0.5f))(F32) - 0.45f, a5 + 0.0f, ((a6 + 0.5f))(F32) - 0.45f, maxX, maxY);
-	MC027_Vertex(s,((a4 + 0.5f))(F32) - 0.45f, a5 + height, ((a6 + 0.5f))(F32) - 0.45f, maxX, minY);
 	MC027_Vertex(s,((a4 + 0.5f))(F32) - 0.45f, a5 + height, ((a6 + 0.5f))(F32) + 0.45f, minX, minY);
 	MC027_Vertex(s,((a4 + 0.5f))(F32) - 0.45f, a5 + 0.0f, ((a6 + 0.5f))(F32) + 0.45f, minX, maxY);
 	MC027_Vertex(s,((a4 + 0.5f))(F32) + 0.45f, a5 + 0.0f, ((a6 + 0.5f))(F32) - 0.45f, maxX, maxY);
 	MC027_Vertex(s,((a4 + 0.5f))(F32) + 0.45f, a5 + height, ((a6 + 0.5f))(F32) - 0.45f, maxX, minY);
-	MC027_Vertex(s,((a4 + 0.5f))(F32) + 0.45f, a5 + height, ((a6 + 0.5f))(F32) - 0.45f, minX, minY);
-	MC027_Vertex(s,((a4 + 0.5f))(F32) + 0.45f, a5 + 0.0f, ((a6 + 0.5f))(F32) - 0.45f, minX, maxY);
-	MC027_Vertex(s,((a4 + 0.5f))(F32) - 0.45f, a5 + 0.0f, ((a6 + 0.5f))(F32) + 0.45f, maxX, maxY);
-	MC027_Vertex(s,((a4 + 0.5f))(F32) - 0.45f, a5 + height, ((a6 + 0.5f))(F32) + 0.45f, maxX, minY);
 }
 
 Bool MC028_BuildSection(MCApp028 *s,MCSection028 *p){if(!p->dirty)return TRUE;s->tiler.overflow=FALSE;Tesselator_begin(&p->solid,7);Tesselator_begin(&p->liquid,7);I32 x,y,z;LevelChunk *chunk=Level_getChunk(&s->level,p->x,p->z,FALSE);if(!chunk)return FALSE;for(x=0;x<16;x++)for(z=0;z<16;z++)for(y=p->y*16;y<p->y*16+16;y++){I32 id=LevelChunk_getTile(chunk,x,y,z);if(!id || id==95)continue;MCRenderTile027 *v=&s->catalog.views[id];if(!v->base)continue;I32 wx=x+p->x*16,wz=z+p->z*16,meta=LevelChunk_getData(chunk,x,y,z);MC028_View(&s->catalog,id,meta);s->tiler.tess=&p->solid;if(v->liquid){s->tiler.tess=&p->liquid;I32 above=Level_getTile(&s->level,wx,y+1,wz);if(above==id || above==id+1 || above==id-1)v->maxY=1;}
@@ -60,8 +52,8 @@ U0 MC028_RenderWorld(MCApp028 *s,F32 partial){MCBody023 *b=&s->minecraft.player-
  MC028_UpdateMeshes(s,12);MCSection028 *visible[512];I32 n=0,i,y;s->draws=0;s->triangles=0;for(i=0;i<256;i++)if(s->meshes[i])for(y=0;y<8;y++){MCSection028 *p=&s->meshes[i]->section[y];if(!p->uploaded)continue;F32 dx=p->x*16+8-eye.x,dy=p->y*16+8-eye.y,dz=p->z*16+8-eye.z;p->distance=dx*dx+dy*dy+dz*dz;MCSection027 test;memset(&test,0,sizeof(test));test.x=p->x;test.y=p->y;test.z=p->z;p->visible=p->distance<(g29_fogFar+16)*(g29_fogFar+16) && MC027_SectionVisible(&test,s->camera.combined);if(!p->visible)continue;if(n<512)visible[n++]=p;}
  for(i=1;i<n;i++){I32 j=i;MCSection028 *value=visible[i];while(j>0 && visible[j-1]->distance>value->distance){visible[j]=visible[j-1];j--;}visible[j]=value;}
  for(i=0;i<n;i++){MCSection028 *p=visible[i];if(p->solid.indices.size){hcgl028_glCallList(p->solidList);s->draws++;s->triangles+=p->solid.indices.size/3;}}
- MC031_RenderMobs(s,partial);MC032_Render(s,partial);MC033_RenderTE(s,partial);MC033_RenderPlayer(s,partial);MC034_Render(s,partial);hcgl028_glBindTexture(0xDE1,s->terrainTex);hcgl028_glEnable(0xBE2);hcgl028_glBlendFunc(0x302,0x303);hcgl028_glDepthMask(0);for(i=n-1;i>=0;i--){MCSection028 *p=visible[i];if(p->liquid.indices.size){hcgl028_glCallList(p->liquidList);s->draws++;s->triangles+=p->liquid.indices.size/3;}}hcgl028_glDepthMask(1);hcgl028_glDisable(0xBE2);
- MC033_Clouds(s,partial);if(s->hasHit && !s->paused && !s->inventory){I32 id=Level_getTile(&s->level,s->hit.x,s->hit.y,s->hit.z);AABB box;if(!MC032_Box(s,id,s->hit.x,s->hit.y,s->hit.z,FALSE,&box))Tile_getAABB(&s->catalog.tiles[id],s->hit.x,s->hit.y,s->hit.z,&box);box.minX-=0.003;box.minY-=0.003;box.minZ-=0.003;box.maxX+=0.003;box.maxY+=0.003;box.maxZ+=0.003;hcgl028_glDisable(0xDE1);hcgl028_glColor4f(0,0,0,1);hcgl028_glLineWidth(1.5);MC028_CubeLines(&box);}
+ MC031_RenderMobs(s,partial);MC032_Render(s,partial);MC033_RenderTE(s,partial);MC033_RenderPlayer(s,partial);MC034_Render(s,partial);MC036_Render(s,partial);hcgl028_glBindTexture(0xDE1,s->terrainTex);hcgl028_glEnable(0xBE2);hcgl028_glBlendFunc(0x302,0x303);hcgl028_glDepthMask(0);for(i=n-1;i>=0;i--){MCSection028 *p=visible[i];if(p->liquid.indices.size){hcgl028_glCallList(p->liquidList);s->draws++;s->triangles+=p->liquid.indices.size/3;}}hcgl028_glDepthMask(1);hcgl028_glDisable(0xBE2);
+ MC033_Clouds(s,partial);MC036_RenderCrack(s,partial);if(s->hasHit && !s->paused && !s->inventory){I32 id=Level_getTile(&s->level,s->hit.x,s->hit.y,s->hit.z);AABB box;if(!MC032_Box(s,id,s->hit.x,s->hit.y,s->hit.z,FALSE,&box))Tile_getAABB(&s->catalog.tiles[id],s->hit.x,s->hit.y,s->hit.z,&box);box.minX-=0.003;box.minY-=0.003;box.minZ-=0.003;box.maxX+=0.003;box.maxY+=0.003;box.maxZ+=0.003;hcgl028_glDisable(0xDE1);hcgl028_glColor4f(0,0,0,1);hcgl028_glLineWidth(1.5);MC028_CubeLines(&box);}
  hcgl028_glDisable(0xB60);MC033_Hand(s,partial);MC035_Overlay(s,partial);
 }
 U0 MC028_GraphicsDestroy(MCApp028 *s){U32 textures[4];textures[0]=s->terrainTex;textures[1]=s->fontTex;textures[2]=s->itemTex;textures[3]=s->titleTex;hcgl028_glDeleteTextures(4,textures);}

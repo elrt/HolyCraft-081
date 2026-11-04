@@ -112,6 +112,13 @@ scene with all functional blocks in front of you. Audio: `MCPE_AUDIO=none|wav:FI
 Собственные точные данные порта по-прежнему в `entities031.dat`/`tiles032.dat`/`world034.dat`/`world035.dat`.
 Тестовые сцены: `MCPE_DEMO035=b|p|r|e|d|w|c|h|s` (s — ступеньки) (только на копии мира!).
 
+## Batch 036
+
+- **Ломание блоков** как в оригинале: трещины `destroy_stage_x` поверх блока во время добычи (`LevelRenderer::renderHit`), частицы блока при ударе (`ParticleEngine::crack`) и при разрушении (`ParticleEngine::destroy`, 3×3×3 `TerrainParticle`).
+- Исправлено мерцание (z-fighting) цветов, травы, саженцев, грибов, ростков и стеблей: у крестовых растений рисовались совпадающие лицевая и обратная грани.
+- Отчёт о падении: при segfault в терминал и в `crash.log` пишется цепочка адресов (`nm -n bin/mcpe-holyc` превращает их в имена функций).
+- Демо `MCPE_DEMO035=k` — ломание блоков в выживании.
+
 ## Layout
 
 | Path | What |
@@ -130,6 +137,7 @@ scene with all functional blocks in front of you. Audio: `MCPE_AUDIO=none|wav:FI
 | `runtime/Batch035Mech.HC` | Bow, throwables, paintings, nether reactor, fire/cactus/suffocation, falling sand, melting, liquids, 3D drops, compass/clock, camera, world035.dat |
 | `runtime/Batch035Nbt.HC` | PE-format `entities.dat` (NBT) save/import |
 | `runtime/Batch035Ao.HC` | smooth lighting (ambient occlusion) |
+| `runtime/Batch036Break.HC` | crack overlay, terrain particles, crash backtrace |
 | `runtime/Batch035Stairs.HC` | stairs shape/collision/placement, cactus, block probe |
 | `app/main.HC` | Entry point; `app/test.HC` self-test |
 | `tools/` | Asset + sound importer (from your own APK) |

@@ -773,6 +773,7 @@ U0 TileRenderer_renderWest(TileRenderer *s,MCRenderTile027 *a2,F32 a3,F32 a4,F32
 	MC027_Vertex(s,v40, v41, v44, maxX, v17);
 }
 U0 TileRenderer_tesselateCrossTexture(TileRenderer *s,MCRenderTile027 *tile,I32 d,F32 a4,F32 a5,F32 a6){
+	// GL_CULL_FACE is off for terrain here, so one quad per plane (the original's mirrored back quads z-fought).
 	TextureUVCoordinateSet* v7; 
 	F32 maxX;					
 	F32 minY;					
@@ -792,18 +793,10 @@ U0 TileRenderer_tesselateCrossTexture(TileRenderer *s,MCRenderTile027 *tile,I32 
 	MC027_Vertex(s,((a4 + 0.5f))(F32) - 0.45f, a5 + 0.0f, ((a6 + 0.5f))(F32) - 0.45f, minX, maxY);
 	MC027_Vertex(s,((a4 + 0.5f))(F32) + 0.45f, a5 + 0.0f, ((a6 + 0.5f))(F32) + 0.45f, maxX, maxY);
 	MC027_Vertex(s,((a4 + 0.5f))(F32) + 0.45f, a5 + 1.0f, ((a6 + 0.5f))(F32) + 0.45f, maxX, minY);
-	MC027_Vertex(s,((a4 + 0.5f))(F32) + 0.45f, a5 + 1.0f, ((a6 + 0.5f))(F32) + 0.45f, minX, minY);
-	MC027_Vertex(s,((a4 + 0.5f))(F32) + 0.45f, a5 + 0.0f, ((a6 + 0.5f))(F32) + 0.45f, minX, maxY);
-	MC027_Vertex(s,((a4 + 0.5f))(F32) - 0.45f, a5 + 0.0f, ((a6 + 0.5f))(F32) - 0.45f, maxX, maxY);
-	MC027_Vertex(s,((a4 + 0.5f))(F32) - 0.45f, a5 + 1.0f, ((a6 + 0.5f))(F32) - 0.45f, maxX, minY);
 	MC027_Vertex(s,((a4 + 0.5f))(F32) - 0.45f, a5 + 1.0f, ((a6 + 0.5f))(F32) + 0.45f, minX, minY);
 	MC027_Vertex(s,((a4 + 0.5f))(F32) - 0.45f, a5 + 0.0f, ((a6 + 0.5f))(F32) + 0.45f, minX, maxY);
 	MC027_Vertex(s,((a4 + 0.5f))(F32) + 0.45f, a5 + 0.0f, ((a6 + 0.5f))(F32) - 0.45f, maxX, maxY);
 	MC027_Vertex(s,((a4 + 0.5f))(F32) + 0.45f, a5 + 1.0f, ((a6 + 0.5f))(F32) - 0.45f, maxX, minY);
-	MC027_Vertex(s,((a4 + 0.5f))(F32) + 0.45f, a5 + 1.0f, ((a6 + 0.5f))(F32) - 0.45f, minX, minY);
-	MC027_Vertex(s,((a4 + 0.5f))(F32) + 0.45f, a5 + 0.0f, ((a6 + 0.5f))(F32) - 0.45f, minX, maxY);
-	MC027_Vertex(s,((a4 + 0.5f))(F32) - 0.45f, a5 + 0.0f, ((a6 + 0.5f))(F32) + 0.45f, maxX, maxY);
-	MC027_Vertex(s,((a4 + 0.5f))(F32) - 0.45f, a5 + 1.0f, ((a6 + 0.5f))(F32) + 0.45f, maxX, minY);
 }
 Bool TileRenderer_tesselateLadderInWorld(TileRenderer *s,MCRenderTile027 *tile,I32 x,I32 y,I32 z){
 	TextureUVCoordinateSet* v9; 

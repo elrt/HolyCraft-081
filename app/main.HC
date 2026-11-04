@@ -3,6 +3,7 @@
 // OS host C (platform/Native030.c, platform/Audio030.c) is limited to SDL2/OpenGL, input, files, timing and sound output.
 #include "../mcpe.HC"
 I32 main(I32 argc,U8 **argv){U8 *capture=NULL,*audit=NULL,*world=NULL;I32 frameLimit=0,screen=-1,seed=0,i;Bool seedSet=FALSE,creative=TRUE,noSave=FALSE,forceTouch=FALSE,forceMouse=FALSE,noSound=FALSE;
+ MC036_CrashHandler();
  for(i=1;i<argc;i++){if(!strcmp(argv[i],"--frames") && i+1<argc)frameLimit=atoi(argv[++i]);else if(!strcmp(argv[i],"--capture") && i+1<argc)capture=argv[++i];else if(!strcmp(argv[i],"--audit") && i+1<argc)audit=argv[++i];
   else if(!strcmp(argv[i],"--world") && i+1<argc)world=argv[++i];else if(!strcmp(argv[i],"--seed") && i+1<argc){seed=atoi(argv[++i]);seedSet=TRUE;}else if(!strcmp(argv[i],"--screen") && i+1<argc)screen=atoi(argv[++i]);
   else if(!strcmp(argv[i],"--survival"))creative=FALSE;else if(!strcmp(argv[i],"--no-save"))noSave=TRUE;else if(!strcmp(argv[i],"--touch"))forceTouch=TRUE;else if(!strcmp(argv[i],"--mouse"))forceMouse=TRUE;else if(!strcmp(argv[i],"--no-sound"))noSound=TRUE;else if(!strcmp(argv[i],"--sound-log"))g30_log=TRUE;
