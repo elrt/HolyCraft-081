@@ -4,6 +4,8 @@ A port of **Minecraft: Pocket Edition 0.8.1** (C++) to **HolyC**, compiled to a 
 Linux x86_64 executable with [hcc](https://github.com/Jamesbarford/holyc-lang).
 Not a TempleOS port: it runs on ordinary Linux.
 
+**Platform: Linux x86_64 only** (tested). Other platforms are not supported.
+
 **100% HolyC, no C code.** The HolyC program calls SDL2 (window, input, audio) and
 OpenGL directly. Everything else is HolyC too: world generation, blocks, lighting,
 physics, chunk rendering, GUI (touch + mouse), inventory, crafting, saving (NBT),
@@ -36,11 +38,21 @@ sound mixing, mobs.
 
 ## No Mojang files here
 
-This repository contains **no** Minecraft textures, sounds or text. You import them
+This repository contains **no** Minecraft textures, sounds or text (the title-screen splashes are our own). You import them
 locally from **your own** copy of the original APK (`PE-a0.8.1-armv7-gb.apk`):
 
 ```sh
 python3 tools/import_assets.py /path/to/PE-a0.8.1-armv7-gb.apk
+```
+
+## Prebuilt binary
+
+Releases contain `bin/mcpe-holyc` (Linux x86_64, glibc 2.34+: Ubuntu 22.04+, Debian 12+, Fedora 35+). You still need SDL2 + OpenGL
+(`sudo apt install libsdl2-2.0-0 libgl1`), zlib, libpng16 and the assets imported from your own APK:
+
+```sh
+python3 tools/import_assets.py /path/to/PE-a0.8.1-armv7-gb.apk
+./scripts/run.sh
 ```
 
 ## Build and run
@@ -92,7 +104,7 @@ scene with all functional blocks in front of you. Audio: `MCPE_AUDIO=none|wav:FI
 - Верхняя грань блока под слоем снега не рисуется (как `Tile::shouldRenderFace`).
 - Текстуры по оригиналу: песчаник (верх/низ/варианты боков), кварцевый блок (обычный/резной/колонна) и кварцевые ступеньки, ступеньки из ели/берёзы/тропического дерева, камнерез.
 
-**Проверено на оригинальной игре.** Декомпиляция 0.8.1 собрана под Linux (SDL1.2, OpenAL-заглушка, патч-обвязка в `tools/origcompat/`), миры гонялись в обе стороны:
+**Совместимость миров с оригинальной 0.8.1 проверена** в обе стороны:
 - мир, созданный оригиналом (23 моба, сундук с вещами, инвентарь) → открывается в порте: мобы, сундук, инвентарь, позиция совпадают; контрольная сумма блоков 17×17×128 вокруг спавна совпала побайтно;
 - мир, изменённый и сохранённый портом → `scripts/export_pe.sh` → открывается оригиналом: те же мобы по типам, выпавшие предметы (`t64`), инвентарь, позиция, время; контрольная сумма блоков совпала; ступеньки рисуются оригиналом так же;
 - копия рабочего мира `t33a` → открывается оригиналом (инвентарь 16 стеков, позиция, здоровье), блоки совпадают.
@@ -119,7 +131,6 @@ scene with all functional blocks in front of you. Audio: `MCPE_AUDIO=none|wav:FI
 | `runtime/Batch035Nbt.HC` | PE-format `entities.dat` (NBT) save/import |
 | `runtime/Batch035Ao.HC` | smooth lighting (ambient occlusion) |
 | `runtime/Batch035Stairs.HC` | stairs shape/collision/placement, cactus, block probe |
-| `tools/origcompat/` | patch + OpenAL stub to build the original 0.8.1 as a world-compatibility harness |
 | `app/main.HC` | Entry point; `app/test.HC` self-test |
 | `tools/` | Asset + sound importer (from your own APK) |
 
