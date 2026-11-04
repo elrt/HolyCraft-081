@@ -1,0 +1,3 @@
+// Batch023: tile/TrapDoorTile; explicit simulation ABI, see docs/BATCH023.md.
+class TrapDoorTile {MCWorld023 *w;MC023Shape shape;I32 id;Bool metal;};
+U0 TrapDoorTile_Init(TrapDoorTile*,MCWorld023*,I32,Bool);U0 TrapDoorTile_setShape(TrapDoorTile*,I32);Bool TrapDoorTile_attachesTo(TrapDoorTile*,I32);I32 TrapDoorTile_getDir(I32);Bool TrapDoorTile_isOpen(I32);U0 TrapDoorTile_setOpen(TrapDoorTile*,I32,I32,I32,Bool);Bool TrapDoorTile_use(TrapDoorTile*,I32,I32,I32);Bool TrapDoorTile_mayPlace(TrapDoorTile*,I32,I32,I32,I32);I32 TrapDoorTile_getPlacementDataValue(I32);U0 TrapDoorTile_neighborChanged(TrapDoorTile*,I32,I32,I32,I32);

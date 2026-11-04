@@ -1,0 +1,2 @@
+class LargeCaveFeature {LargeFeature base;I32 water,calmWater,rock,dirt,grass,lava;};
+U0 LargeCaveFeature_Init(LargeCaveFeature *s,I32 water,I32 calmWater,I32 rock,I32 dirt,I32 grass,I32 lava);U0 LargeCaveFeature_addFeature(LargeCaveFeature *s,Level *level,I32 a3,I32 a4,I32 a5,I32 a6,U8 *blocks,I32 a8);U0 LargeCaveFeature_addTunnel(LargeCaveFeature *s,I32 a2,I32 a3,U8 *blocks,F32 a5,F32 a6,F32 a7,F32 a8,F32 a9,F32 a10,I32 a11,I32 a12,F32 a13);

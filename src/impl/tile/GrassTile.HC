@@ -1,0 +1,13 @@
+// Ported from minecraftpe/impl/tile/GrassTile.cpp; host-facing representation, not C++ ABI.
+
+U0 GrassTile_Init(GrassTile *s,MCTileHost020 *h,I32 id) {s->h=h;s->blockID=id;h->baseInit(h->ctx,s,id,2,NULL);h->ticking(h->ctx,s,TRUE);s->top=h->texture(h->ctx,"grass",0);s->side=h->texture(h->ctx,"grass",1);s->snow=h->texture(h->ctx,"grass",2);s->carried=h->texture(h->ctx,"grass",3);s->dirt=h->texture(h->ctx,"dirt",0);s->field_5C=3;}
+Bool GrassTile_randomWalk(GrassTile *s,I32 *x,I32 *y,I32 *z,I32 n) {MCTileHost020 *h=s->h;I32 i;for(i=0;;i++){if(i>=n/16)return n>15;*x+=Random_genrand_int32(h->random)%3-1;U32 v=Random_genrand_int32(h->random)%3-1;I32 delta=(Random_genrand_int32(h->random)%3*v)(I32);*y+=delta/2;*z+=Random_genrand_int32(h->random)%3-1;if(h->tile(h->ctx,*x,*y-1,*z)!=h->grass || h->solid(h->ctx,*x,*y,*z))return FALSE;}}
+Bool GrassTile_onFertilized(GrassTile *s,I32 x,I32 y,I32 z) {MCTileHost020 *h=s->h;I32 i;for(i=16;i!=64;i++){I32 xx=x,yy=y+1,zz=z;if(GrassTile_randomWalk(s,&xx,&yy,&zz,i) && !h->tile(h->ctx,xx,yy,zz)){I32 r=Random_genrand_int32(h->random)&15,tile,data;if(r==0){tile=h->flower;data=0;}else if(r==1){tile=h->rose;data=0;}else{tile=h->tallgrass;data=1;if(r==2)data=2;}if(h->survives(h->ctx,tile,xx,yy,zz))h->setTileData(h->ctx,xx,yy,zz,tile,data,3);}}return TRUE;}
+U0 * GrassTile_getTexture(GrassTile *s,I32 face,I32 meta) {if(face==1)return s->top;if(face)return s->side;return s->dirt;}
+U0 * GrassTile_getWorldTexture(GrassTile *s,I32 x,I32 y,I32 z,I32 face) {if(face==1)return s->top;if(!face)return s->dirt;if(s->h->snowMaterial(s->h->ctx,x,y+1,z))return s->snow;return s->side;}
+U0 * GrassTile_getCarriedTexture(GrassTile *s,I32 face,I32 meta) {if(face==1)return s->carried;return GrassTile_getTexture(s,face,meta);}
+U0 GrassTile_tick(GrassTile *s,I32 x,I32 y,I32 z,Random *rng) {MCTileHost020 *h=s->h;if(h->isClient)return;if(h->rawLight(h->ctx,x,y+1,z)<=3 && h->blocksLight(h->ctx,x,y+1,z)){if(Random_genrand_int32(rng)&3)return;h->setTile(h->ctx,x,y,z,h->dirt,2);return;}if(h->rawLight(h->ctx,x,y+1,z)>8){I32 xx=x+Random_genrand_int32(rng)%3-1,yy=y+Random_genrand_int32(rng)%5,zz=z+Random_genrand_int32(rng)%3-1;if(h->tile(h->ctx,xx,yy-3,zz)==h->dirt && h->rawLight(h->ctx,xx,yy-2,zz)>3 && !h->blocksLight(h->ctx,xx,yy-2,zz))h->setTile(h->ctx,xx,yy-3,zz,h->grass,2);}}
+I32 GrassTile_getResource(GrassTile *s,I32 meta,Random *rng) {return s->h->dirtResource(s->h->ctx,rng);}
+I32 GrassTile_getColor(GrassTile *s,I32 meta) {return 0x87CD49;}
+I32 GrassTile_getWorldColor(GrassTile *s,I32 x,I32 y,I32 z) {return GrassTile_getColor(s,0);}
+U0 GrassTile_Destroy(GrassTile *s) {}

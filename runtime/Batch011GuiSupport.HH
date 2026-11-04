@@ -1,0 +1,5 @@
+#ifndef MCPE_BATCH011_GUI_SUPPORT
+#define MCPE_BATCH011_GUI_SUPPORT
+class MCGuiHost011 {U0 *host;U0 (*fill)(U0 *,I32,I32,I32,I32,U32);Bool (*bind)(U0 *,U8 *);Bool (*textureSize)(U0 *,U8 *,F32 *,F32 *);U0 (*rgba)(U0 *,F32,F32,F32,F32);U0 (*blit)(U0 *,I32,I32,I32,I32,I32,I32,I32,I32);U0 (*text)(U0 *,U8 *,I32,I32,U32,Bool);U0 (*textShadow)(U0 *,U8 *,I32,I32,U32);I32 (*textWidth)(U0 *,U8 *);I32 (*fontHeight)(U0 *,U8 *,I32);U0 (*wordWrap)(U0 *,U8 *,F32,F32,F32,U32,Bool,I32);U8 *(*optionDescription)(U0 *,U0 *);F64 (*time)(U0 *);U0 (*begin)(U0 *,I32);U0 (*color)(U0 *,U32);U0 (*vertex)(U0 *,F32,F32,F32,F32,F32);U0 (*draw)(U0 *,Bool);U0 *(*patchCreate)(U0 *,U8 *,IntRectangle *,I32,I32,I32,I32);U0 (*patchDestroy)(U0 *,U0 *);U0 (*patchSize)(U0 *,U0 *,F32,F32);U0 (*patchDraw)(U0 *,U0 *,F32,F32);Bool (*optionGetBool)(U0 *,U0 *);F32 (*optionGetFloat)(U0 *,U0 *);U0 (*optionSetFloat)(U0 *,U0 *,F32);U0 (*optionToggle)(U0 *,U0 *);};
+U0 MC011_quadGUI(MCGuiHost011 *h,F32 x0,F32 y0,F32 x1,F32 y1,F32 z,F32 u0,F32 v0,F32 u1,F32 v1){h->vertex(h->host,x0,y0,z,u0,v0);h->vertex(h->host,x0,y1,z,u0,v1);h->vertex(h->host,x1,y1,z,u1,v1);h->vertex(h->host,x1,y0,z,u1,v0);}
+#endif

@@ -1,0 +1,7 @@
+// Batch 009: minecraftpe/impl/entity/ai/goals/FleeSunGoal.cpp
+U0 FleeSunGoal_Init(FleeSunGoal *s,MCGoalContext009 *h,F32 speed) { Goal_Init(&s->base);s->base.context=s;s->base.canUseFn=&FleeSunGoal_canUse;s->base.continueFn=&FleeSunGoal_canContinueToUse;s->base.startFn=&FleeSunGoal_start;s->holder=h;s->level=h->world;s->speedMultiplier=speed;Vec3_Init(&s->target);Goal_setRequiredControlFlags(&s->base,1); }
+Bool FleeSunGoal_getHidePos(FleeSunGoal *s,Vec3 *out) { MCGoalContext009 *h=s->holder;I32 i,x,y,z;F32 fx,fy,fz;for(i=0;i<10;i++) { fx=h->actor->posX+(Random_genrand_int32(h->random)%20)(F32)-10.0; x=Mth_floor(fx);fy=h->actor->minY+(Random_genrand_int32(h->random)%6)(F32)-3.0;y=Mth_floor(fy);fz=h->actor->posZ+(Random_genrand_int32(h->random)%20)(F32)-10.0;z=Mth_floor(fz);if(!h->canSeeSky(s->level,x,y,z) && h->walkTargetValue(h->host,x,y,z)<0.0) { Vec3_Init(out,x,y,z);return TRUE; } }return FALSE; }
+Bool FleeSunGoal_canUse(Goal *b) { FleeSunGoal *s=b->context;MCGoalContext009 *h=s->holder;Vec3 p;Vec3_Init(&p);if(!h->isDay(s->level)||!h->onFire||!h->canSeeSky(s->level,Mth_floor(h->actor->posX),h->actor->minY(I32),Mth_floor(h->actor->posZ)))return FALSE;if(!FleeSunGoal_getHidePos(s,&p))return FALSE;s->target=p;return TRUE; }
+Bool FleeSunGoal_canContinueToUse(Goal *b) { FleeSunGoal *s=b->context;return s->holder->navDone; }
+U0 FleeSunGoal_start(Goal *b) { FleeSunGoal *s=b->context;s->holder->navMove(s->holder->host,s->target.x,s->target.y,s->target.z,s->speedMultiplier); }
+U0 FleeSunGoal_setLevel(FleeSunGoal *s,U0 *level) { s->level=level; }

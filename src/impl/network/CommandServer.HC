@@ -1,0 +1,6 @@
+
+U0 CommandServer_Init(CommandServer *s,Minecraft *mc,MCCommandIO027 *io){memset(s,0,sizeof(CommandServer));s->minecraft=mc;s->io=io;s->socket=-1;MCString_FromC(&s->input,"");MCString_FromC(&s->output,"");}
+U0 CommandServer_Destroy(CommandServer *s){if(s->initialized && s->io && s->io->close!=NULL)s->io->close(s->io->ctx,s->socket);MCString_Destroy(&s->input);MCString_Destroy(&s->output);s->initialized=FALSE;}
+Bool CommandServer_attach(CommandServer *s,I32 sock){if(s->initialized || sock<0 || !s->io || !s->io->read || !s->io->write)return FALSE;s->socket=sock;s->initialized=TRUE;return TRUE;}
+MCString *CommandServer_parse(CommandServer *s,MCString *line){MC027_SetC(&s->output,"Fail\n");s->outputOffset=0;return &s->output;}
+Bool CommandServer_tick(CommandServer *s){if(!s->initialized)return FALSE;I32 budget=1023,lines=0;while(s->outputOffset<s->output.size){I32 n=s->io->write(s->io->ctx,s->socket,s->output.data+s->outputOffset,s->output.size-s->outputOffset);if(n<0)return TRUE;if(n==0)return FALSE;s->outputOffset+=n;}while(budget-- && lines<32){U8 ch;I32 n=s->io->read(s->io->ctx,s->socket,&ch,1);if(n<0)return TRUE;if(n==0)return FALSE;if(ch=='\n'){CommandServer_parse(s,&s->input);MC027_SetC(&s->input,"");lines++;return TRUE;}if(s->input.size>=4096)return FALSE;MC027_Append(&s->input,&ch,1);}return TRUE;}

@@ -1,0 +1,1 @@
+class SmallButton {Button base;U0 *option;};U0 SmallButton_Init(SmallButton *,MCGuiHost011 *,I32,I32,I32,I32,I32,U0 *,U8 *);U0 *SmallButton_getOption(SmallButton *);U0 SmallButton_Destroy(SmallButton *);

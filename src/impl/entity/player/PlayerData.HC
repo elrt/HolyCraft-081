@@ -1,0 +1,4 @@
+// Inline implementation from PlayerData.hpp; original cpp only includes header.
+U0 PlayerData_Init(PlayerData *s) {s->x=0;s->y=0;s->z=0;s->motX=0;s->motY=0;s->motZ=0;}
+F32 MC011_clamp(F32 v,F32 min,F32 max) {if(v>max)return max;if(v<=min)return min;return v;}
+U0 PlayerData_loadPlayer(PlayerData *s,MCPlayerSnapshot011 *p) {F32 x,y,z;p->setPos(p->host,0,0,0);x=MC011_clamp(s->x,4,252);y=MC011_clamp(s->y,4,126);z=MC011_clamp(s->z,4,252);p->prevPosX=p->prevX=p->x=x;p->prevPosY=p->prevY=p->y=y;p->prevPosZ=p->prevZ=p->z=z;p->motX=s->motX;if(!(fabsf(s->motX)<=10))p->motX=0;p->motY=s->motY;if(!(fabsf(s->motY)<=10))p->motY=0;p->motZ=s->motZ;if(fabsf(s->motZ)>10)p->motZ=0;p->pitch=MC011_clamp(s->pitch,-100000,100000);p->prevPitch=p->pitch;p->yaw=MC011_clamp(s->yaw,-100000,100000);p->prevYaw=p->yaw;p->fallDistance=s->fallDistance;p->fire=s->fire;p->air=s->field_26;p->onGround=s->onGround;p->setPos(p->host,s->x,s->y,s->z);p->x=s->x;p->y=s->y;p->z=s->z;}

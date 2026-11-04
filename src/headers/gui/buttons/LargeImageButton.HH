@@ -1,0 +1,1 @@
+class LargeImageButton {ImageButton base;F32 scale;};U0 LargeImageButton_Init(LargeImageButton *,MCGuiHost011 *,I32,U8 *,ImageDef *);U0 LargeImageButton_setupDefault(LargeImageButton *);U0 LargeImageButton_render(LargeImageButton *,I32,I32);U0 LargeImageButton_Destroy(LargeImageButton *);

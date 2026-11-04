@@ -1,0 +1,3 @@
+// Batch022: gui/screens/StartMenuScreen; explicit host ABI, see docs/BATCH022.md.
+class StartMenuScreen {MC022Box start,join,options,buy,create;MCString copyright,version;I32 width,height,copyrightX,versionX;MC022DrawHost *host;};
+U0 StartMenuScreen_Init(StartMenuScreen*,I32,I32,MCString*,MC022DrawHost*);U0 StartMenuScreen_Destroy(StartMenuScreen*);U0 StartMenuScreen_setupPositions(StartMenuScreen*);U0 StartMenuScreen_updateLicense(StartMenuScreen*,I32,Bool);U0 StartMenuScreen_buttonClicked(StartMenuScreen*,I32);Bool StartMenuScreen_handleBackEvent(StartMenuScreen*,Bool);U0 StartMenuScreen_render(StartMenuScreen*,I32,I32);

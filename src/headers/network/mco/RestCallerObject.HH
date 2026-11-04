@@ -1,0 +1,3 @@
+class RestCallerObject {I32 interup,type,field24,field34;U0 *restCaller,*callback14,*callback1C;MCString fieldC,field10;RestCallTagData tag;};
+U0 RestCallerObject_Init(RestCallerObject *s,I32 type,I32 interup,U0 *caller,U8 *a4,U8 *a5,U0 *cb1,U0 *cb2,RestCallTagData *tag,I32 a9){s->type=type;s->interup=interup;s->restCaller=caller;MCString_FromC(&s->fieldC,a4);if(a5)MCString_FromC(&s->field10,a5);else MCString_Init(&s->field10);s->callback14=cb1;s->callback1C=cb2;s->tag.guid_g=tag->guid_g;MCString_CopyInit(&s->tag.str,&tag->str);s->field24=a9;}
+U0 RestCallerObject_Destroy(RestCallerObject *s){MCString_Destroy(&s->fieldC);MCString_Destroy(&s->field10);RestCallTagData_Destroy(&s->tag);}

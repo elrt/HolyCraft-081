@@ -1,0 +1,4 @@
+class Button {GuiElement base;MCString message;I32 id;Bool text,pressed,overriding;U0 *derived;U0 (*bgFn)(Button *,I32,I32);U0 (*faceFn)(Button *,I32,I32);};
+U0 Button_Init(Button *,MCGuiHost011 *,I32,I32,I32,I32,I32,U8 *);U0 Button_Destroy(Button *);Bool Button_isInside(Button *,I32,I32);Bool Button_hovered(Button *,I32,I32);Bool Button_isPressed(Button *,I32,I32);Bool Button_clicked(Button *,I32,I32);U0 Button_setMsg(Button *,U8 *);U0 Button_released(Button *);U0 Button_setPressed(Button *);I32 Button_getYImage(Button *,Bool);U0 Button_render(Button *,I32,I32);U0 Button_renderBg(Button *,I32,I32);U0 Button_renderFace(Button *,I32,I32);
+
+U0 Button_InitAt(Button *,MCGuiHost011 *,I32,I32,I32,U8 *);U0 Button_InitDefault(Button *,MCGuiHost011 *,I32,U8 *);Bool Button_isOveridingScreenRendering(Button *);U0 Button_setOverrideScreenRendering(Button *,Bool);

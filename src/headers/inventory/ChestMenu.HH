@@ -1,0 +1,1 @@
+class ChestMenu {ContainerMenu base;U0 *chest;I32 pairedID;};U0 ChestMenu_Init(ChestMenu *,MCInventoryHost011 *,U0 *,I32,I32);U0 ChestMenu_Destroy(ChestMenu *);Bool ChestMenu_tileEntityDestroyedIsInvalid(BaseContainerMenu *,I32);

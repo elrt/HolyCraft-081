@@ -1,0 +1,1 @@
+class FlameParticle {Particle base;F32 originalScale;};U0 FlameParticle_Init(FlameParticle *,MCParticleHost011 *,I32,U8 *);U0 FlameParticle_init(Particle *,F32,F32,F32,F32,F32,F32,I32);U0 FlameParticle_tick(Particle *);U0 FlameParticle_render(FlameParticle *,F32,F32,F32,F32,F32,F32);F32 FlameParticle_getBrightness(FlameParticle *,F32);

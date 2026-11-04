@@ -1,0 +1,1 @@
+U0 BlankButton_Init(BlankButton *s,MCGuiHost011 *h,I32 id,I32 x,I32 y,I32 w,I32 height){Button_Init(&s->base,h,id,x,y,w,height,"");s->base.base.visible=FALSE;}U0 BlankButton_Destroy(BlankButton *s){Button_Destroy(&s->base);}

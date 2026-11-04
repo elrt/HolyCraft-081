@@ -1,0 +1,1 @@
+class PigRenderer {MCMobRenderHost012 *host;U0 *base;};U0 PigRenderer_Init(PigRenderer *,MCMobRenderHost012 *,U0 *,F32);U0 PigRenderer_Destroy(PigRenderer *);I32 PigRenderer_prepareArmor(PigRenderer *,Bool,I32,F32);

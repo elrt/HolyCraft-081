@@ -1,0 +1,4 @@
+// Inline original implementation from NearestAttackableTargetGoal.hpp.
+U0 NearestAttackableTargetGoal_Init(NearestAttackableTargetGoal *s,MCGoalHost012 *h,F32 radius){TargetGoal_Init(&s->base,h,radius,1);s->field_18=1;s->field_1C=0;s->targetedPlayer=NULL;Goal_setRequiredControlFlags(&s->base.base,1);s->base.base.canUseFn=&NearestAttackableTargetGoal_canUse;s->base.base.startFn=&NearestAttackableTargetGoal_start;}
+Bool NearestAttackableTargetGoal_canUse(Goal *g){NearestAttackableTargetGoal *s=g->context;MCGoalHost012 *h=s->base.host;MCGoalEntity012 *e=NULL;if(s->field_1C>0 && Random_genrand_int32(h->random)%s->field_1C(U32))return FALSE;if(s->field_18==1)e=h->nearestPlayer(h->host,s->base.radius);if(TargetGoal_canAttack(&s->base,e,FALSE)){s->targetedPlayer=e;return TRUE;}return FALSE;}
+U0 NearestAttackableTargetGoal_start(Goal *g){NearestAttackableTargetGoal *s=g->context;s->base.host->setTarget(s->base.host->host,s->targetedPlayer);}

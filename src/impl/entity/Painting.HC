@@ -1,0 +1,8 @@
+U0 Painting_Init(Painting *s,MCPaintHost015 *h){s->host=h;s->renderId=PAINTING;}
+U0 Painting_InitRandom(Painting *s,MCPaintHost015 *h,I32 dir){s->host=h;Painting_setRandomMotive(s,dir);s->renderId=PAINTING;}
+U0 Painting_InitNamed(Painting *s,MCPaintHost015 *h,I32 dir,MCString *name){s->host=h;s->motive=Motive_getMotiveByName(name);h->setDir(h->host,s,dir);s->renderId=PAINTING;}
+U0 Painting_setRandomMotive(Painting *s,I32 dir){MCPtrVector all,possible;Motive *m;I64 i;U32 r;MCPaintHost015 *h=s->host;Motive_getAllMotivesAsList(&all);MCPtrVector_Init(&possible);for(i=0;i<all.size;i++){m=all.data[i];if(m->isUsed){s->motive=m;h->setDir(h->host,s,dir);if(h->survives(h->host,s))MCPtrVector_Push(&possible,m);}}if(!possible.size)s->motive=Motive_DefaultImage;else{r=h->random(h->host);s->motive=possible.data[r%possible.size];}h->setDir(h->host,s,dir);MCPtrVector_Destroy(&possible);MCPtrVector_Destroy(&all);}
+F32 Painting_getShadowRadius(Painting *s){return 0;}Bool Painting_isPickable(Painting *s){return TRUE;}I32 Painting_getEntityTypeId(Painting *s){return 83;}
+U0 Painting_readAdditionalSaveData(Painting *s,U0 *tag){MCString name;s->host->getMotive(s->host->host,tag,&name);s->motive=Motive_getMotiveByName(&name);MCString_Destroy(&name);s->host->readBase(s->host->host,tag);}
+U0 Painting_addAdditonalSaveData(Painting *s,U0 *tag){if(s->motive)s->host->putMotive(s->host->host,tag,&s->motive->name);s->host->writeBase(s->host->host,tag);}
+I32 Painting_getWidth(Painting *s){return s->motive->w;}I32 Painting_getHeight(Painting *s){return s->motive->h;}U0 Painting_dropItem(Painting *s){if(s->host->gameType(s->host->host)!=1)s->host->spawnPainting(s->host->host);}

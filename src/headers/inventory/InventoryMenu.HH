@@ -1,0 +1,1 @@
+class InventoryMenu {BaseContainerMenu base;MCInventoryHost011 *container;};U0 InventoryMenu_Init(InventoryMenu *,MCInventoryHost011 *);U0 InventoryMenu_Destroy(InventoryMenu *);U0 InventoryMenu_getItems(BaseContainerMenu *,MCVector *);U0 InventoryMenu_setSlot(BaseContainerMenu *,I32,MCInventoryItem011 *);Bool InventoryMenu_tileEntityDestroyedIsInvalid(BaseContainerMenu *,I32);

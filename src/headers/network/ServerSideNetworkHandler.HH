@@ -1,0 +1,4 @@
+// Packet admission/borrowed player registry and block broadcast subset. No fake login/auth.
+class MCNetPlayer027 {U64 guid;Player *player;};
+class ServerSideNetworkHandler {Minecraft *minecraft;Level *level;RakNetInstance *network;MCVector players;Bool allowConnections;};
+U0 ServerSideNetworkHandler_Init(ServerSideNetworkHandler*,Minecraft*,Level*,RakNetInstance*);U0 ServerSideNetworkHandler_Destroy(ServerSideNetworkHandler*);Player *ServerSideNetworkHandler_getPlayer(ServerSideNetworkHandler*,U64);Bool ServerSideNetworkHandler_admitVerifiedPlayer(ServerSideNetworkHandler*,U64,Player*,Bool);Bool ServerSideNetworkHandler_allowIncomingPacketId(ServerSideNetworkHandler*,U64,I32);U0 ServerSideNetworkHandler_onDisconnect(ServerSideNetworkHandler*,U64);Bool ServerSideNetworkHandler_tileChanged(ServerSideNetworkHandler*,I32,I32,I32);

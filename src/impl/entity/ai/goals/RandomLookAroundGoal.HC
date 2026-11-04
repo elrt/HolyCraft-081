@@ -1,0 +1,6 @@
+// Batch 009: minecraftpe/impl/entity/ai/goals/RandomLookAroundGoal.cpp
+U0 RandomLookAroundGoal_Init(RandomLookAroundGoal *s,MCGoalContext009 *h) { Goal_Init(&s->base);s->base.context=s;s->base.canUseFn=&RandomLookAroundGoal_canUse;s->base.continueFn=&RandomLookAroundGoal_canContinueToUse;s->base.startFn=&RandomLookAroundGoal_start;s->base.tickFn=&RandomLookAroundGoal_tick;s->holder=h;s->xOff=0;s->zOff=0;s->ticksLeft=0;Goal_setRequiredControlFlags(&s->base,3); }
+Bool RandomLookAroundGoal_canUse(Goal *b) { RandomLookAroundGoal *s=b->context;return Random_nextFloat(s->holder->random)<0.02; }
+Bool RandomLookAroundGoal_canContinueToUse(Goal *b) { RandomLookAroundGoal *s=b->context;return s->ticksLeft>=0; }
+U0 RandomLookAroundGoal_start(Goal *b) { RandomLookAroundGoal *s=b->context;F32 v=Random_nextFloat(s->holder->random),angle=6.2832(F32)*v;s->xOff=cosf(angle);s->zOff=sinf(angle);s->ticksLeft=Random_genrand_int32(s->holder->random)%20+20; }
+U0 RandomLookAroundGoal_tick(Goal *b) { RandomLookAroundGoal *s=b->context;MCGoalContext009 *h=s->holder;--s->ticksLeft;LookControl_setLookAt(h->look,h->actor->posX+s->xOff,h->actor->posY+h->actor->headHeight,h->actor->posZ+s->zOff,10,h->maxHeadXRot); }

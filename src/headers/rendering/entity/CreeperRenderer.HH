@@ -1,0 +1,1 @@
+class CreeperRenderer {MCMobRenderHost012 *host;U0 *base;};U0 CreeperRenderer_Init(CreeperRenderer *,MCMobRenderHost012 *,U0 *,F32);U0 CreeperRenderer_Destroy(CreeperRenderer *);I32 CreeperRenderer_getOverlayColor(CreeperRenderer *,F32);U0 CreeperRenderer_scale(CreeperRenderer *,F32);

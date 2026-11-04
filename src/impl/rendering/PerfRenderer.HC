@@ -1,0 +1,6 @@
+// Batch023: rendering/PerfRenderer; explicit simulation ABI, see docs/BATCH023.md.
+U0 PerfRenderer_Init(PerfRenderer *s) {memset(s,0,sizeof(PerfRenderer));s->lastRenderedAt=-1;MCString_FromC(&s->section,"root");}
+U0 PerfRenderer_Destroy(PerfRenderer *s) {MCString_Destroy(&s->section);}
+U0 PerfRenderer_debugFpsMeterKeyPress(PerfRenderer *s,I32 n,MCString *names,I32 count) {if(count<=0)return;if(n){if(n>0 && n-1<count-1 && !(strcmp(names[1].data,"unspecified")==0)){if(s->section.size)MCString_AppendChar017(&s->section,'.');MCString_AppendStr017(&s->section,&names[1]);/* Original always selects first child, even for n>1. */}}else if(names[0].size){I32 i;for(i=s->section.size-1;i>=0;i--)if(s->section.data[i]=='.'){s->section.size=i;s->section.data[i]=0;break;}}}
+Bool PerfRenderer_record(PerfRenderer *s,F32 partial,F64 now,Bool hasLog) {if(!hasLog)return FALSE;if(s->lastRenderedAt== -1)s->lastRenderedAt=now;s->partial[s->index]=partial;s->elapsed[s->index]=now-s->lastRenderedAt;s->index++;if(s->index>=512)s->index=0;return TRUE;/* Source never advances lastRenderedAt and its chart renderer is unfinished. */}
+U0 PerfRenderer_toPercentString(F32 f,MCString *out) {U8 tmp[32];snprintf(tmp,32,"%3.2f%%",f(F64));MCString_FromC(out,tmp);}

@@ -1,0 +1,1 @@
+class EntityTileRenderer {MCTileRenderHost015 *host;U0 *tileEntitySelf;};U0 EntityTileRenderer_Init(EntityTileRenderer *,MCTileRenderHost015 *,U0 *);U0 EntityTileRenderer_render(EntityTileRenderer *,U0 *,I32,F32);

@@ -1,0 +1,1 @@
+U0 EntityTileRenderer_Init(EntityTileRenderer *s,MCTileRenderHost015 *h,U0 *entity){s->host=h;s->tileEntitySelf=entity;}U0 EntityTileRenderer_render(EntityTileRenderer *s,U0 *tile,I32 data,F32 partial){s->host->dispatch(s->host->host,s->tileEntitySelf,(0)(F32),(0)(F32),(0)(F32),(0)(F32));}

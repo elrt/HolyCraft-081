@@ -1,0 +1,2 @@
+// Batch 009: minecraftpe/headers/util/PacketUtil.hpp
+I8 PacketUtil_Rot_degreesToChar(F32 degrees);F32 PacketUtil_Rot_charToDegrees(I8 rot);U0 PacketUtil_Rot_entityToChar(MCPacketEntity009 *e,I8 *yaw,I8 *pitch);U0 PacketUtil_Rot_charToEntity(MCPacketEntity009 *e,I8 yaw,I8 pitch);U0 PacketUtil_writeItemInstance(MCPacketItem009 *item,MCBitStream *stream);U0 PacketUtil_readItemInstance(MCPacketItem009 *out,MCBitStream *stream);

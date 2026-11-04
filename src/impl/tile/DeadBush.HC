@@ -1,0 +1,2 @@
+U0 DeadBush_Init(DeadBush *s,MCTileHost013 *h,I32 id,U8 *name){s->host=h;s->id=id;s->textureUV=*h->texture(h->host,name,1);}I32 DeadBush_getResource(DeadBush *s){return -1;}
+U0 DeadBush_playerDestroy(DeadBush *s,I32 x,I32 y,I32 z,I32 data,Bool selected,I32 selectedID){MCTileHost013 *h=s->host;if(!h->isClient && selected){if(selectedID==h->shearsID)h->popItem(h->host,x,y,z,h->deadBushID,data);else{printf("Original DeadBush::playerDestroy recurses indefinitely\n");exit(98);}}}Bool DeadBush_mayPlaceOn(DeadBush *s,I32 id){return id==s->host->sandID;}

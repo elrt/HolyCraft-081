@@ -1,0 +1,6 @@
+// Ported from minecraftpe/impl/rendering/entity/ItemSpriteRenderer.cpp; host-facing representation, not C++ ABI.
+
+U0 ItemSpriteRenderer_Init(ItemSpriteRenderer *s,MCG020 *g,MCItem020 *item) {s->g=g;s->mesh.handle=NULL;MCString_Init(&s->textureFile);s->item=item;s->cameraYaw=0;s->cameraPitch=0;g->listener(g->ctx,s,TRUE);}
+U0 ItemSpriteRenderer_onAppSuspended(ItemSpriteRenderer *s) {if(s->mesh.handle)s->g->meshDelete(s->g->ctx,s->mesh.handle);s->mesh.handle=NULL;}
+U0 ItemSpriteRenderer_Destroy(ItemSpriteRenderer *s) {s->g->listener(s->g->ctx,s,FALSE);ItemSpriteRenderer_onAppSuspended(s);MCString_Destroy(&s->textureFile);}
+U0 ItemSpriteRenderer_render(ItemSpriteRenderer *s,MCRenderEntity020 *e,F32 x,F32 y,F32 z,F32 angle,F32 t) {MCG020 *g=s->g;if(!s->mesh.handle){F32 uv[4];g->icon(g->ctx,s->item,uv,&s->textureFile);MCG020_C(g,14,4);MCG020_C(g,15,0,0,1);MCG020_C(g,16,-0.5,-0.25,0,uv[0],uv[3]);MCG020_C(g,16,0.5,-0.25,0,uv[1],uv[3]);MCG020_C(g,16,0.5,0.75,0,uv[1],uv[2]);MCG020_C(g,16,-0.5,0.75,0,uv[0],uv[2]);s->mesh.handle=g->meshEnd(g->ctx);}MCG020_C(g,7,0xBC0);MCG020_C(g,1);MCG020_C(g,3,x,y,z);MCG020_C(g,4,0.5,0.5,0.5);g->bind(g->ctx,&s->textureFile);MCG020_C(g,5,180-s->cameraYaw,0,1,0);MCG020_C(g,5,-s->cameraPitch,1,0,0);g->meshDraw(g->ctx,s->mesh.handle);MCG020_C(g,2);MCG020_C(g,8,0xBC0);}

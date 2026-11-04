@@ -1,0 +1,1 @@
+class NearestAttackableTargetGoal {TargetGoal base;MCGoalEntity012 *targetedPlayer;I32 field_18,field_1C;};U0 NearestAttackableTargetGoal_Init(NearestAttackableTargetGoal *,MCGoalHost012 *,F32);Bool NearestAttackableTargetGoal_canUse(Goal *);U0 NearestAttackableTargetGoal_start(Goal *);

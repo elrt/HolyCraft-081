@@ -1,0 +1,4 @@
+// Inline implementation from CompassItem.hpp; CompassItem.cpp contains only #include.
+U0 CompassItem_Init(CompassItem *s,MCItemContext010 *c,I32 id) { I32 i;TextureUVCoordinateSet *t;MCItem009_Init(&s->base,c->items,id);TextureUVCoordinateSet_DefaultInit(&s->icon);s->itemTexture="compass.png";s->frames=32;for(i=0;i<32;i++) { t=&s->textures[i];t->minX=0;t->maxX=1;t->width=16;t->height=512;t->minY=i*0.03125;t->maxY=(i+1)*0.03125; } }
+TextureUVCoordinateSet *CompassItem_getIcon(CompassItem *s,I32 frame,Bool carried) { if(carried)return &s->icon;if(frame<0 || frame>=32) { printf("CompassItem invalid frame\n");exit(98); }return &s->textures[frame]; }
+I32 CompassItem_getAnimationFrameFor(CompassItem *s,MCItemContext010 *c) { F32 dx=c->spawnX-c->playerX,dz=c->spawnZ-c->playerZ,len=sqrtf(dx*dx+dz*dz),a;if(len>=0.0001) { dx/=len;dz/=len; }else { dx=0;dz=0; }a=atan2f(dz,dx)*57.296-c->yaw+90.0;while(a<0)a+=360.0;while(a>=360.0)a-=360.0;return a/360.0*s->frames; }

@@ -1,0 +1,2 @@
+// Inline implementation from Snowball.hpp; original cpp only includes header.
+U0 Snowball_Init(MCProjectile011 *s){s->renderId=18;}I32 Snowball_getEntityTypeId(MCProjectile011 *s){return 81;}U0 Snowball_onHit(MCProjectile011 *s,HitResult *hit){I32 i;if(hit->hitType==1)s->hurt(s->host,hit->entity,0);for(i=0;i<6;i++)s->particle(s->host,10,s->x,s->y,s->z,s->particleItem);if(!s->isClient){s->removed=TRUE;s->remove(s->host);}}

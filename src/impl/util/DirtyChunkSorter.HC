@@ -1,0 +1,3 @@
+// Batch 009: minecraftpe/impl/util/DirtyChunkSorter.cpp includes the header only.
+F32 MCDirtyRenderChunk009_distance(MCDirtyRenderChunk009 *c,MCPacketEntity009 *e) { F32 x=e->x-c->blockX(F32),y=e->y-c->blockY(F32),z=e->z-c->blockZ(F32);return (y*y+x*x)+z*z; }
+Bool DirtyChunkSorter_less(DirtyChunkSorter *s,MCDirtyRenderChunk009 *a,MCDirtyRenderChunk009 *b) { F32 da,db;if(a->isInFrustumMaybe) { if(!b->isInFrustumMaybe)return FALSE; }else if(b->isInFrustumMaybe)return TRUE;da=MCDirtyRenderChunk009_distance(a,s->entity);db=MCDirtyRenderChunk009_distance(b,s->entity);if(da<db)return FALSE;if(da<=db)return a->field_48>b->field_48;return TRUE; }

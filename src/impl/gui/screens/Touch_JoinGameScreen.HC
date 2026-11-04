@@ -1,0 +1,8 @@
+// Batch022: gui/screens/Touch_JoinGameScreen; explicit host ABI, see docs/BATCH022.md.
+U0 Touch_JoinGameScreen_Init(Touch_JoinGameScreen *s,I32 w,I32 h,MC022DrawHost *host) {JoinGameScreen_Init(s,w,h,host);Touch_JoinGameScreen_setupPositions(s);}
+U0 Touch_JoinGameScreen_setupPositions(Touch_JoinGameScreen *s) {s->join.y=0;s->back.y=0;s->back.x=0;s->header.x=s->back.w;s->header.y=0;s->header.w=s->width-s->back.w;}
+U0 Touch_JoinGameScreen_tick(Touch_JoinGameScreen *s,MCVector *all) {if(JoinGameScreen_isIndexValid(s,s->list.selected)){JoinGameScreen_buttonClicked(s,2);return;}/* Correct original ++vector-pointer infinite/out-of-bounds loop to iterate indices. */MCVector current;MC022_FilterServers(&current,all);MC022Server *fresh=current.data(MC022Server*),*old=s->list.servers.data(MC022Server*);I64 i,j;if(current.size==s->list.servers.size){for(i=s->list.servers.size-1;i>=0;i--)for(j=0;j<current.size;j++)if(MCString_Equal(&fresh[j].address,&old[i].address))MCString_Assign(&old[i].name,&fresh[j].name);MC022_ServerListClear(&current);}else{MC022_ServerListClear(&s->list.servers);s->list.servers=current;s->list.selected=-1;}s->join.active=JoinGameScreen_isIndexValid(s,s->list.selected);}
+
+
+U0 Touch_JoinGameScreen_render(Touch_JoinGameScreen *s,Bool network,F64 time) {I32 center=s->header.x+s->header.w/2;if(!network){MC022_Center(s->host,"WiFi is disabled",center,8,0xFFFFFFFF);return;}MC022_Center(s->host,"Scanning for WiFi Games...",center,8,0xFFFFFFFF);U8 spin[2],*syms="-\\|/";I32 i=time*5.5;i=i%4;if(i<0)i+=4;spin[0]=syms[i];spin[1]=0;MC022_Center(s->host,spin,center+MC022_TextWidth(s->host,"Scanning for WiFi Games...")/2+6,8,0xFFFFFFFF);}
+

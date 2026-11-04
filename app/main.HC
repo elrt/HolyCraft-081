@@ -1,0 +1,34 @@
+// MCPE 0.8.1 / HolyC WIP035 native entry: original sound effects (SoundEngine port, PCM from the APK) + APK-faithful Touch GUI (start menu, world list, create/delete world,
+// progress, HUD + touch D-pad, pause, options, chat, creative/survival inventory, crafting) over the batch028 game.
+// OS host C (platform/Native030.c, platform/Audio030.c) is limited to SDL2/OpenGL, input, files, timing and sound output.
+#include "../mcpe.HC"
+I32 main(I32 argc,U8 **argv){U8 *capture=NULL,*audit=NULL,*world=NULL;I32 frameLimit=0,screen=-1,seed=0,i;Bool seedSet=FALSE,creative=TRUE,noSave=FALSE,forceTouch=FALSE,forceMouse=FALSE,noSound=FALSE;
+ for(i=1;i<argc;i++){if(!strcmp(argv[i],"--frames") && i+1<argc)frameLimit=atoi(argv[++i]);else if(!strcmp(argv[i],"--capture") && i+1<argc)capture=argv[++i];else if(!strcmp(argv[i],"--audit") && i+1<argc)audit=argv[++i];
+  else if(!strcmp(argv[i],"--world") && i+1<argc)world=argv[++i];else if(!strcmp(argv[i],"--seed") && i+1<argc){seed=atoi(argv[++i]);seedSet=TRUE;}else if(!strcmp(argv[i],"--screen") && i+1<argc)screen=atoi(argv[++i]);
+  else if(!strcmp(argv[i],"--survival"))creative=FALSE;else if(!strcmp(argv[i],"--no-save"))noSave=TRUE;else if(!strcmp(argv[i],"--touch"))forceTouch=TRUE;else if(!strcmp(argv[i],"--mouse"))forceMouse=TRUE;else if(!strcmp(argv[i],"--no-sound"))noSound=TRUE;else if(!strcmp(argv[i],"--sound-log"))g30_log=TRUE;
+  else if(!strcmp(argv[i],"--help")){printf("MCPE 0.8.1 HolyC WIP035 (Linux x86_64, SDL2/OpenGL)\n--world DIR (open/create worlds/DIR) --seed N --survival --screen N --touch | --mouse --frames N --capture FILE.ppm --audit FILE.json --no-save --no-sound --sound-log\nSound: SDL2 audio (MCPE_AUDIO=pulse|alsa|pipewire|none|wav:FILE); volume = Options > Sound.\nTouch mode (default, like the APK): drag = look, tap = place/use, hold = break, on-screen D-pad, toolbar ... = inventory, top-right = chat.\nKeyboard: WASD move, Space jump, Shift sneak, E inventory, T chat, / command, 1-9 hotbar, Q drop, F fly (creative), F1 hide GUI, F2 screenshot, F5 third-person view, F6 save, Esc back/pause.\nBatch034: RMB/hold on a minecart = ride, Shift/Space = get off, LMB = hit; sign item opens the sign editor; chat commands /summon <zombie|skeleton|spider|creeper|pigzombie|minecart|...>, /time day|night.\nBatch035: bow (hold RMB/touch to draw), snowball/egg throw, mushroom stew, paintings, nether reactor (survival), fire/cactus/suffocation damage, falling sand/gravel, ice/snow melt, redstone ore glow, animated water/lava.\nOptions > Controls > Use touchscreen off = classic grabbed mouse (LMB break, RMB place, wheel hotbar).\n");return 0;}
+  else{printf("Unknown or incomplete option: %s\n",argv[i]);return 2;}}
+ MCApp028 *s=MC_Alloc(sizeof(MCApp028));MC029_Init(s);MC030_TileSounds(&s->catalog.registry);
+ if(!hc028_open(s->width,s->height,"MCPE HolyC WIP035")){printf("%s\n",hc028_error());MC029_Destroy(s);free(s);return 1;}s->graphics=TRUE;
+ if(!MC029_GraphicsInit(s)){printf("Required texture or graphics initialization failed\n");MC029_Destroy(s);hc028_close();free(s);return 1;}
+ MC030_SoundInit(!noSound);g30_volume=g29_opt.sound;
+ if(forceTouch){g29_opt.useTouch=TRUE;MC029_HudConfig();}if(forceMouse){g29_opt.useTouch=FALSE;MC029_HudConfig();}
+ if(world){Bool bad=!world[0] || !strcmp(world,".") || !strcmp(world,"..");for(i=0;world[i];i++)if(world[i]=='/')bad=TRUE;if(bad)MC029_Status("--world expects a directory name below worlds/");else MC029_AutoWorld(s,world,seed,seedSet,creative);MC029_ApplyPending(s);}
+ if(screen>=0 && screen<=12){g29_optFromWorld=s->worldReady;if(screen==G29S_CRAFT){g29_craftSize=0;g29_craftStone=FALSE;}MC029_Go(screen);MC029_ApplyPending(s);}
+ U64 previous=hc028_clock_ns(),fpsAt=previous;F64 accumulator=0;I32 fpsFrames=0,result=0;
+ while(s->running){U64 begin=hc028_clock_ns();MCNativeEvent028 event;while(hc028_poll(&event))MC029_Event(s,&event);MC029_TextFrame();
+  U64 now=hc028_clock_ns();F64 delta=(now-previous)/1000000000.0;previous=now;if(delta>0.25)delta=0.25;if(delta<0)delta=0;accumulator+=delta;I32 ticks=0;
+  g30_volume=g29_opt.sound;if(s->catalog.registry.tiles[2].soundVolume!=0.5)MC030_TileSounds(&s->catalog.registry);
+  while(accumulator>=0.05 && ticks<5){MC029_GameTick(s);accumulator-=0.05;ticks++;}F32 partial=accumulator/0.05;MC030_Listener(s,partial);MC029_FrameTurn(s,ticks);MC029_Requests(s);
+  g29_frameSec=delta;if(g29_frameSec<=0)g29_frameSec=0.016;MC035_ItemAnim(s);MC035_CameraShot(s);MC029_Frame(s,partial);
+  U32 glError=hcgl028_glGetError();if(glError){printf("ERROR030 OpenGL 0x%x at frame %d\n",glError,s->frames);result=1;s->running=FALSE;}
+  if(g29_shot){g29_shot=FALSE;U8 shotPath[4096];if(hc028_shot_path(shotPath,4096) && hc028_capture(shotPath,g29_W,g29_H)){U8 m[256];snprintf(m,256,"Screenshot: %s",shotPath);MC029_Status(m);}else MC029_Status("Screenshot failed");}
+  s->frames++;fpsFrames++;if(now-fpsAt>=1000000000){s->fps=fpsFrames;fpsFrames=0;fpsAt=now;U8 title[160];I32 sid=g29_screen;if(sid<0 || sid>17)sid=0;sprintf(title,"MCPE HolyC WIP035 | %s | %d FPS",g29_screenName[sid],s->fps);hc028_title(title);hc028_flush();}
+  if(frameLimit>0 && s->frames>=frameLimit)s->running=FALSE;if(!s->running && capture){if(!hc028_capture(capture,g29_W,g29_H)){printf("Capture failed\n");result=1;}}
+  hc028_swap();I64 elapsed=(hc028_clock_ns()-begin)/1000000;if(elapsed<25)hc028_sleep(25-elapsed);}
+ if(g29_bound && s->worldReady && !noSave && !s->failed && s->unsaved && !MC028_Save(s))result=1;
+ if(audit){U0 *file=fopen(audit,"wb");if(file){F32 x=0,y=0,z=0;I32 health=0,selected=0;if(s->worldReady){MCBody023 *b=&s->minecraft.player->player.mob.entity.body;x=b->x;y=b->y;z=b->z;health=b->health;selected=s->minecraft.player->player.inventory.selectedSlot;}
+   fprintf(file,"{\"native_window\":true,\"full_original_parity\":false,\"gui\":\"touch-0.8.1\",\"screen\":%d,\"use_touch\":%d,\"gui_scale\":%d,\"slots\":%d,\"world_ready\":%d,\"creative\":%d,\"failed\":%d,\"frames\":%d,\"ticks\":%d,\"fps\":%d,\"width\":%d,\"height\":%d,\"x\":%.6f,\"y\":%.6f,\"z\":%.6f,\"health\":%d,\"selected\":%d,\"generated_chunks\":%d,\"loaded_chunks\":%d,\"mesh_builds\":%d,\"draws\":%d,\"triangles\":%d,\"drops\":%d,\"sound_backend\":\"%s\",\"sound_device\":%d,\"sounds_loaded\":%d,\"sounds_missing\":%d,\"sound_requests\":%d,\"sounds_started\":%d,\"sounds_dropped\":%d}\n",
+    g29_screen,g29_opt.useTouch,g29_scale,g29_slots,s->worldReady,s->creative,s->failed,s->frames,s->ticks,s->fps,g29_W,g29_H,x,y,z,health,selected,s->generated,s->loaded,s->meshBuilds,s->draws,s->triangles,s->level.drops.size,hc030_audio_backend(),g30_audio,g30_sndN,g30_sndMissing,g30_requests,g30_started,hc030_snd_stats(1));fclose(file);}else result=1;}
+ printf("EXIT030 frames=%d ticks=%d screen=%d world=%d sounds=%d result=%d\n",s->frames,s->ticks,g29_screen,s->worldReady,g30_started,result);MC030_SoundClose();MC029_Destroy(s);MC028_GraphicsDestroy(s);hc028_close();free(s);return result;
+}

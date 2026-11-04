@@ -1,0 +1,1 @@
+class WorkbenchScreen {MCScreenHost012 *host;U0 *base;};U0 WorkbenchScreen_Init(WorkbenchScreen *,MCScreenHost012 *,I32);U0 WorkbenchScreen_Destroy(WorkbenchScreen *);Bool WorkbenchScreen_filterRecipe(WorkbenchScreen *,MCFilterItem009 *,MCFilterTiles009 *);

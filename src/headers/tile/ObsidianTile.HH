@@ -1,0 +1,1 @@
+class ObsidianTile {MCTileHost013 *host;I32 id;Bool glowing;};U0 ObsidianTile_Init(ObsidianTile *,MCTileHost013 *,I32,Bool);U0 ObsidianTile_poofParticles(ObsidianTile *,I32,I32,I32);U0 ObsidianTile_animateTick(ObsidianTile *,I32,I32,I32,Random *);I32 ObsidianTile_getResource(ObsidianTile *);I32 ObsidianTile_getResourceCount(ObsidianTile *);

@@ -1,0 +1,1 @@
+class OpenDoorGoal {DoorInteractGoal base;Bool closeAfter;I32 ticksLeft;};U0 OpenDoorGoal_Init(OpenDoorGoal *,MCDoorHost012 *,Bool);Bool OpenDoorGoal_canContinueToUse(Goal *);U0 OpenDoorGoal_start(Goal *);U0 OpenDoorGoal_stop(Goal *);U0 OpenDoorGoal_tick(Goal *);

@@ -1,0 +1,14 @@
+# build output
+build/
+bin/
+# Mojang assets: imported locally from your own APK, never committed
+assets/
+*.apk
+# runtime data
+worlds/
+screenshots/
+options.txt
+*.ppm
+*.zip
+__pycache__/
+.DS_Store

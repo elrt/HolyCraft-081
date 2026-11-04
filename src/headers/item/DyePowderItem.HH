@@ -1,0 +1,3 @@
+// Port of minecraftpe/headers/item/DyePowderItem.hpp
+class DyePowderItem { MCItem009 base;TextureUVCoordinateSet textures[16]; };
+U0 DyePowderItem_Init(DyePowderItem *,MCItemContext010 *,I32);TextureUVCoordinateSet *DyePowderItem_getIcon(DyePowderItem *,I32);Bool DyePowderItem_useOn(DyePowderItem *,MCItemContext010 *,MCPacketItem009 *,I32,I32,I32);U0 DyePowderItem_interactEnemy(DyePowderItem *,MCItemContext010 *,MCPacketItem009 *,Bool);U0 DyePowderItem_getDescriptionId(DyePowderItem *,MCItemContext010 *,MCPacketItem009 *,MCString *);U0 DyePowderItem_getName(DyePowderItem *,MCItemContext010 *,MCPacketItem009 *,MCString *);

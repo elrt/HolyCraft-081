@@ -1,0 +1,5 @@
+// Batch 003. Source: minecraftpe/impl/OptionsFile.cpp
+U0 OptionsFile_setSettingsFolderPath(OptionsFile *self,MCString *folder) { I64 n=folder->size;U8 *data=MC_Alloc(n+13);memcpy(data,folder->data,n);memcpy(data+n,"/options.txt",13);MCString_Destroy(&self->filename);MCString_FromBytes(&self->filename,data,n+12);free(data); }
+U0 OptionsFile_save(OptionsFile *self,MCVector *strings) { U0 *file=fopen(MCString_CStr(&self->filename),"w");if(!file)return;I64 i;for(i=0;i<strings->size;i++){MCString *s=MCVector_At(strings,i);fputs(MCString_CStr(s),file);fputs("\n",file);}fclose(file); }
+U0 OptionsFile_getOptionStrings(OptionsFile *self,MCVector *out) { MCStringVector_Init(out);U0 *file=fopen(MCString_CStr(&self->filename),"r");if(!file)return;U8 line[128];while(fgets(line,128,file)){I64 size=MC_StrLen(line);if(size<=2)continue;I64 start=0,i;for(i=0;i<=size;i++){if(i==size || line[i]==':'){I64 end=i;while(end>start && (line[end-1]==' ' || line[end-1]=='\n' || line[end-1]=='\r' || line[end-1]=='\t'))end--;if(end>start){MCString value;MCString_FromBytes(&value,line+start,end-start);MCVector_Push(out,&value);}start=i+1;}}}fclose(file); }
+

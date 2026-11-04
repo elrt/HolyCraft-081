@@ -1,0 +1,2 @@
+class MCAtlasEntry015 {MCString key;TextureAtlasTextureItem item;};class TextureAtlas {MCString path;MCVector entries;};
+U0 TextureAtlas_Init(TextureAtlas *,MCString *);U0 TextureAtlas_Destroy(TextureAtlas *);U0 TextureAtlas_parseJSON(TextureAtlas *,MCAtlasHost015 *,U0 *,TextureUVCoordinateSet *);TextureAtlasTextureItem *TextureAtlas_getTextureItem(TextureAtlas *,MCString *);U0 TextureAtlas_load(TextureAtlas *,MCAtlasHost015 *);

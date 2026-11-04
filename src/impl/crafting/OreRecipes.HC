@@ -1,0 +1,40 @@
+// Batch 009: minecraftpe/impl/crafting/OreRecipes.cpp and inline header
+U0 OreRecipes_addRecipes(MCRecipeBook009 *book) {
+ MCRecipeIDs009 *ids=book->ids;MCRecipeItem result,defs[4];U8 keys[4];
+ MC009_item(book,&result,ids->Tile_goldBlock,1,0);
+ keys[0]='#';MC009_item(book,&defs[0],ids->Item_goldIngot,9,0);
+ MC009_shape(book,&result,"###","###","###",keys,defs,1);
+ MC009_item(book,&result,ids->Item_goldIngot,9,0);
+ keys[0]='#';MC009_item(book,&defs[0],ids->Tile_goldBlock,1,-1);
+ MC009_shape(book,&result,"#",NULL,NULL,keys,defs,1);
+ MC009_item(book,&result,ids->Tile_ironBlock,1,0);
+ keys[0]='#';MC009_item(book,&defs[0],ids->Item_ironIngot,9,0);
+ MC009_shape(book,&result,"###","###","###",keys,defs,1);
+ MC009_item(book,&result,ids->Item_ironIngot,9,0);
+ keys[0]='#';MC009_item(book,&defs[0],ids->Tile_ironBlock,1,-1);
+ MC009_shape(book,&result,"#",NULL,NULL,keys,defs,1);
+ MC009_item(book,&result,ids->Tile_emeraldBlock,1,0);
+ keys[0]='#';MC009_item(book,&defs[0],ids->Item_emerald,9,0);
+ MC009_shape(book,&result,"###","###","###",keys,defs,1);
+ MC009_item(book,&result,ids->Item_emerald,9,0);
+ keys[0]='#';MC009_item(book,&defs[0],ids->Tile_emeraldBlock,1,-1);
+ MC009_shape(book,&result,"#",NULL,NULL,keys,defs,1);
+ MC009_item(book,&result,ids->Tile_lapisBlock,1,0);
+ keys[0]='#';MC009_item(book,&defs[0],ids->Item_dye_powder,9,4);
+ MC009_shape(book,&result,"###","###","###",keys,defs,1);
+ MC009_item(book,&result,ids->Item_dye_powder,9,4);
+ keys[0]='#';MC009_item(book,&defs[0],ids->Tile_lapisBlock,1,-1);
+ MC009_shape(book,&result,"#",NULL,NULL,keys,defs,1);
+ MC009_item(book,&result,ids->Tile_hayBlock,1,0);
+ keys[0]='#';MC009_item(book,&defs[0],ids->Item_wheat,9,0);
+ MC009_shape(book,&result,"###","###","###",keys,defs,1);
+ MC009_item(book,&result,ids->Item_wheat,9,0);
+ keys[0]='#';MC009_item(book,&defs[0],ids->Tile_hayBlock,1,-1);
+ MC009_shape(book,&result,"#",NULL,NULL,keys,defs,1);
+ MC009_item(book,&result,ids->Tile_coalBlock,1,0);
+ keys[0]='#';MC009_item(book,&defs[0],ids->Item_coal,9,0);
+ MC009_shape(book,&result,"###","###","###",keys,defs,1);
+ MC009_item(book,&result,ids->Item_coal,9,0);
+ keys[0]='#';MC009_item(book,&defs[0],ids->Tile_coalBlock,1,-1);
+ MC009_shape(book,&result,"#",NULL,NULL,keys,defs,1);
+}

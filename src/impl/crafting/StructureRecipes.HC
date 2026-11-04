@@ -1,0 +1,43 @@
+// Batch 009: minecraftpe/impl/crafting/StructureRecipes.cpp and inline header
+U0 StructureRecipes_addRecipes(MCRecipeBook009 *book) {
+ MCRecipeIDs009 *ids=book->ids;MCRecipeItem result,defs[4];U8 keys[4];
+ MC009_item(book,&result,ids->Tile_chest,1,0);
+ keys[0]='#';MC009_item(book,&defs[0],ids->Tile_wood,1,-1);
+ MC009_shape(book,&result,"###","# #","###",keys,defs,1);
+ MC009_item(book,&result,ids->Tile_furnace,1,0);
+ keys[0]='#';MC009_item(book,&defs[0],ids->Tile_stoneBrick,1,-1);
+ MC009_shape(book,&result,"###","# #","###",keys,defs,1);
+ MC009_item(book,&result,ids->Tile_workBench,1,0);
+ keys[0]='#';MC009_item(book,&defs[0],ids->Tile_wood,1,-1);
+ MC009_shape(book,&result,"##","##",NULL,keys,defs,1);
+ MC009_item(book,&result,ids->Tile_stonecutterBench,1,0);
+ keys[0]='#';MC009_item(book,&defs[0],ids->Tile_stoneBrick,1,-1);
+ MC009_shape(book,&result,"##","##",NULL,keys,defs,1);
+ MC009_item(book,&result,ids->Tile_sandStone,1,0);
+ keys[0]='#';MC009_item(book,&defs[0],ids->Tile_sand,1,-1);
+ MC009_shape(book,&result,"##","##",NULL,keys,defs,1);
+ MC009_item(book,&result,ids->Tile_sandStone,4,2);
+ keys[0]='#';MC009_item(book,&defs[0],ids->Tile_sandStone,1,-1);
+ MC009_shape(book,&result,"##","##",NULL,keys,defs,1);
+ MC009_item(book,&result,ids->Tile_sandStone,1,1);
+ keys[0]='#';MC009_item(book,&defs[0],ids->Tile_stoneSlabHalf,1,1);
+ MC009_shape(book,&result,"#","#",NULL,keys,defs,1);
+ MC009_item(book,&result,ids->Tile_stoneBrickSmooth,4,0);
+ keys[0]='#';MC009_item(book,&defs[0],ids->Tile_rock,1,-1);
+ MC009_shape(book,&result,"##","##",NULL,keys,defs,1);
+ MC009_item(book,&result,ids->Tile_thinGlass,16,0);
+ keys[0]='#';MC009_item(book,&defs[0],ids->Tile_glass,1,-1);
+ MC009_shape(book,&result,"###","###",NULL,keys,defs,1);
+ MC009_item(book,&result,ids->Tile_netherBrick,1,0);
+ keys[0]='N';MC009_item(book,&defs[0],ids->Item_netherbrick,1,0);
+ MC009_shape(book,&result,"NN","NN",NULL,keys,defs,1);
+ MC009_item(book,&result,ids->Tile_quartzBlock,1,0);
+ keys[0]='N';MC009_item(book,&defs[0],ids->Item_netherQuartz,1,0);
+ MC009_shape(book,&result,"NN","NN",NULL,keys,defs,1);
+ MC009_item(book,&result,ids->Tile_quartzBlock,1,1);
+ keys[0]='#';MC009_item(book,&defs[0],ids->Tile_stoneSlabHalf,1,6);
+ MC009_shape(book,&result,"#","#",NULL,keys,defs,1);
+ MC009_item(book,&result,ids->Tile_quartzBlock,2,2);
+ keys[0]='#';MC009_item(book,&defs[0],ids->Tile_quartzBlock,1,0);
+ MC009_shape(book,&result,"#","#",NULL,keys,defs,1);
+}

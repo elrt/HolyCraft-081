@@ -1,0 +1,1 @@
+class CritParticle2 {Particle base;Bool enabled;F32 originalScale;};U0 CritParticle2_Init(CritParticle2 *,MCParticleHost011 *,I32,U8 *);U0 CritParticle2_init(Particle *,F32,F32,F32,F32,F32,F32,I32);U0 CritParticle2_tick(Particle *);U0 CritParticle2_render(CritParticle2 *,F32,F32,F32,F32,F32,F32);

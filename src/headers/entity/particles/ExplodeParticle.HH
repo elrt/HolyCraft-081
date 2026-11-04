@@ -1,0 +1,1 @@
+class ExplodeParticle {Particle base;};U0 ExplodeParticle_Init(ExplodeParticle *,MCParticleHost011 *,I32,U8 *);U0 ExplodeParticle_init(Particle *,F32,F32,F32,F32,F32,F32,I32);U0 ExplodeParticle_tick(Particle *);

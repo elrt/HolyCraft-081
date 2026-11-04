@@ -1,0 +1,3 @@
+// Inline implementation from SignItem.hpp; SignItem.cpp contains only #include.
+U0 SignItem_Init(SignItem *s,MCItemContext010 *c,I32 id) { MCItem009_Init(&s->base,c->items,id);s->base.maxStackSize=16; }
+Bool SignItem_useOn(SignItem *s,MCItemContext010 *c,MCPacketItem009 *it,I32 x,I32 y,I32 z,I32 face) { I32 dir,id,data;if(!face || !c->solidMaterial)return FALSE;if(face==1)y++;else if(face==2)z--;else if(face==3)z++;else if(face==4)x--;else if(face==5)x++;if(!c->tileMayPlace(c->host,c->signID,x,y,z))return FALSE;if(face==1) { id=c->signID;dir=MC010_floor((c->yaw+180.0)*16.0/360.0+0.5);data=dir&15; }else { id=c->wallSignID;data=face; }c->place->setTileAndData(c->place->host,x,y,z,id,data,3);it->count--;c->openTextEdit(c->host,x,y,z);return TRUE; }

@@ -1,0 +1,1 @@
+class PotatoTile {MCTileHost011 *host;I32 id;TextureUVCoordinateSet textures[4];};U0 PotatoTile_Init(PotatoTile *,MCTileHost011 *,I32);TextureUVCoordinateSet *PotatoTile_getTexture(PotatoTile *,I32);U0 PotatoTile_spawnResources(PotatoTile *,I32,I32,I32,I32,F32);I32 PotatoTile_getBasePlantId(PotatoTile *);I32 PotatoTile_getBaseSeed(PotatoTile *);

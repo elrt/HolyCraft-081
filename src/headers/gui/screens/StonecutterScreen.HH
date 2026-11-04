@@ -1,0 +1,1 @@
+class StonecutterScreen {MCScreenHost012 *host;U0 *base;};U0 StonecutterScreen_Init(StonecutterScreen *,MCScreenHost012 *);U0 StonecutterScreen_Destroy(StonecutterScreen *);Bool StonecutterScreen_filterRecipe(StonecutterScreen *,MCFilterItem009 *,MCFilterTiles009 *);

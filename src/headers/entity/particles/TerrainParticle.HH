@@ -1,0 +1,1 @@
+class TerrainParticle {Particle base;I32 tileID;TextureUVCoordinateSet tileTexture;};U0 TerrainParticle_Init(TerrainParticle *,MCParticleHost011 *,I32,U8 *);U0 TerrainParticle_init(Particle *,F32,F32,F32,F32,F32,F32,I32);U0 TerrainParticle_render(TerrainParticle *,F32,F32,F32,F32,F32,F32);

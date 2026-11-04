@@ -1,0 +1,1 @@
+U0 IContainerListener_refreshContainer(MCMenuListener011 *s,U0 *m,MCVector *v){}U0 IContainerListener_slotChanged(MCMenuListener011 *s,U0 *m,I32 i,MCInventoryItem011 *it,Bool result){}U0 IContainerListener_setContainerData(MCMenuListener011 *s,U0 *m,I32 i,I32 v){}

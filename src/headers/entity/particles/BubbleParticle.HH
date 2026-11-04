@@ -1,0 +1,1 @@
+class BubbleParticle {Particle base;};U0 BubbleParticle_Init(BubbleParticle *,MCParticleHost011 *,I32,U8 *);U0 BubbleParticle_init(Particle *,F32,F32,F32,F32,F32,F32,I32);U0 BubbleParticle_tick(Particle *);

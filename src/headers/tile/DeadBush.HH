@@ -1,0 +1,1 @@
+class DeadBush {MCTileHost013 *host;I32 id;TextureUVCoordinateSet textureUV;};U0 DeadBush_Init(DeadBush *,MCTileHost013 *,I32,U8 *);I32 DeadBush_getResource(DeadBush *);U0 DeadBush_playerDestroy(DeadBush *,I32,I32,I32,I32,Bool,I32);Bool DeadBush_mayPlaceOn(DeadBush *,I32);

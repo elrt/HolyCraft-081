@@ -1,0 +1,1 @@
+U0 SmallButton_Init(SmallButton *s,MCGuiHost011 *h,I32 id,I32 x,I32 y,I32 w,I32 height,U0 *option,U8 *msg){Button_Init(&s->base,h,id,x,y,w,height,msg);s->option=option;}U0 *SmallButton_getOption(SmallButton *s){return s->option;}U0 SmallButton_Destroy(SmallButton *s){Button_Destroy(&s->base);}

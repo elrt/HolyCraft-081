@@ -1,0 +1,3 @@
+// Batch 009: minecraftpe/headers/item/WeaponItem.hpp
+class WeaponItem { MCItem009 base;MCToolTier009 tier;I32 damage;MCToolTiles009 *tiles; };
+U0 WeaponItem_Init(WeaponItem *s,MCItemContext009 *c,I32 id,MCToolTier009 *tier,MCToolTiles009 *tiles);MCPacketItem009 *WeaponItem_use(WeaponItem *s,MCPacketItem009 *item);I32 WeaponItem_getMaxUseDuration(WeaponItem *s);F32 WeaponItem_getDestroySpeed(WeaponItem *s,MCToolTile009 *tile);Bool WeaponItem_canDestroySpecial(WeaponItem *s,MCToolTile009 *tile);I32 WeaponItem_getAttackDamage(WeaponItem *s);U0 WeaponItem_hurtEnemy(WeaponItem *s,MCItemContext009 *c,MCPacketItem009 *item);Bool WeaponItem_mineBlock(WeaponItem *s,MCItemContext009 *c,MCPacketItem009 *item);Bool WeaponItem_isHandEquipped(WeaponItem *s);

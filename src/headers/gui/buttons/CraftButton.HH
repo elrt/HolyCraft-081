@@ -1,0 +1,1 @@
+class CraftButton {ImageButton base;U0 *normal,*highlight;I32 field_78;};U0 CraftButton_Init(CraftButton *,MCGuiHost011 *,I32);U0 CraftButton_initPatches(CraftButton *);U0 CraftButton_setSize(CraftButton *,F32,F32);U0 CraftButton_getItemPos(CraftButton *,IntRectangle *);U0 CraftButton_renderBg(Button *,I32,I32);U0 CraftButton_Destroy(CraftButton *);

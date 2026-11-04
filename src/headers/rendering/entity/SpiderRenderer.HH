@@ -1,0 +1,1 @@
+class SpiderRenderer {MCMobRenderHost012 *host;U0 *base,*eyes;};U0 SpiderRenderer_Init(SpiderRenderer *,MCMobRenderHost012 *,U0 *,F32);U0 SpiderRenderer_Destroy(SpiderRenderer *);I32 SpiderRenderer_prepareArmor(SpiderRenderer *,I32);F32 SpiderRenderer_getFlipDegrees(SpiderRenderer *);U0 SpiderRenderer_scale(SpiderRenderer *,F32);

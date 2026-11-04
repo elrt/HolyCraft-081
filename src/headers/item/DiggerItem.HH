@@ -1,0 +1,3 @@
+// Batch 009: minecraftpe/headers/item/DiggerItem.hpp
+class DiggerItem { MCItem009 base;F32 efficiencyMultiplier;MCToolTier009 *tier;I32 damageAgainstEntity;MCPtrVector field_50;Bool field_5C[256]; };
+U0 DiggerItem_Init(DiggerItem *s,MCItemContext009 *c,I32 id,I32 damage,MCToolTier009 *tier,MCToolTile009 **tiles,I32 count);U0 DiggerItem_setTiles(DiggerItem *s,MCToolTile009 **tiles,I32 count);U0 DiggerItem_Destroy(DiggerItem *s);F32 DiggerItem_getDestroySpeed(DiggerItem *s,MCToolTile009 *tile);I32 DiggerItem_getAttackDamage(DiggerItem *s);U0 DiggerItem_hurtEnemy(DiggerItem *s,MCItemContext009 *c,MCPacketItem009 *item);Bool DiggerItem_mineBlock(DiggerItem *s,MCItemContext009 *c,MCPacketItem009 *item);Bool DiggerItem_isHandEquipped(DiggerItem *s);

@@ -1,0 +1,1 @@
+class SheepRenderer {MCMobRenderHost012 *host;U0 *base,*sheared,*furred;};U0 SheepRenderer_Init(SheepRenderer *,MCMobRenderHost012 *,U0 *,U0 *,F32);U0 SheepRenderer_Destroy(SheepRenderer *);U0 SheepRenderer_render(SheepRenderer *,U0 *,Bool,F32,F32,F32,F32,F32);I32 SheepRenderer_prepareArmor(SheepRenderer *,I32,F32);

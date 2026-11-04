@@ -1,0 +1,13 @@
+#ifndef MCPE_BATCH015_SUPPORT
+#define MCPE_BATCH015_SUPPORT
+class MCCreativeHost015 {U0 *host,*bow;U0 (*extinguish)(U0 *,I32,I32,I32,I32);U0 (*destroyBlock)(U0 *,I32,I32,I32,I32);U0 *(*carried)(U0 *,U0 *);U0 *(*itemClass)(U0 *,U0 *);I32 (*aux)(U0 *,U0 *);U0 (*setAux)(U0 *,U0 *,I32);U0 (*releaseBase)(U0 *,U0 *);};
+class MCTntHost015 {U0 *host;Bool isClient;U0 *flint;Bool (*signalSource)(U0 *,I32);Bool (*signal)(U0 *,I32,I32,I32);U0 (*setTile)(U0 *,I32,I32,I32,I32,I32);U0 *(*newPrimed)(U0 *,F32,F32,F32);U0 (*addEntity)(U0 *,U0 *);U0 (*sound)(U0 *,U0 *,U8 *,F32,F32);I32 (*getFuse)(U0 *,U0 *);U0 (*setFuse)(U0 *,U0 *,I32);U32 (*random)(U0 *);U0 *(*selectedItem)(U0 *,U0 *);U0 *(*itemClass)(U0 *,U0 *);Bool (*instabuild)(U0 *,U0 *);U0 (*hurt)(U0 *,U0 *,I32,U0 *);Bool (*baseUse)(U0 *,I32,I32,I32,U0 *);};
+class MCLicenseHost015 {MCGuiHost014 *gui;I32 (*buttonHeight)(U0 *,U0 *);U0 (*setLabel)(U0 *,U0 *,U8 *);U0 (*quit)(U0 *);U0 (*buy)(U0 *);};
+class MCPrimedHost015 {U0 *host;Bool isClient;F32 (*randomFloat)(U0 *);F32 (*sinAngle)(U0 *,F32);F32 (*cosAngle)(U0 *,F32);U0 (*move)(U0 *,U0 *,F32,F32,F32);U0 (*remove)(U0 *,U0 *);U0 (*explode)(U0 *,F32,F32,F32,F32);U0 (*smoke)(U0 *,F32,F32,F32);I32 (*getByte)(U0 *,U0 *,U8 *);U0 (*putByte)(U0 *,U0 *,U8 *,I32);};
+class MCPaintHost015 {U0 *host;U0 (*setDir)(U0 *,U0 *,I32);Bool (*survives)(U0 *,U0 *);U32 (*random)(U0 *);I32 (*gameType)(U0 *);U0 (*spawnPainting)(U0 *);U0 (*readBase)(U0 *,U0 *);U0 (*writeBase)(U0 *,U0 *);U0 (*getMotive)(U0 *,U0 *,MCString *);U0 (*putMotive)(U0 *,U0 *,MCString *);};
+class MCFlyingHost015 {U0 *host;Bool (*water)(U0 *,U0 *);Bool (*lava)(U0 *,U0 *);U0 (*moveRelative)(U0 *,U0 *,F32,F32,F32);U0 (*move)(U0 *,U0 *,F32,F32,F32);I32 (*tile)(U0 *,I32,I32,I32);F32 (*slipperiness)(U0 *,I32);};
+class MCAtlasHost015 {U0 *host;U0 *(*readAsset)(U0 *,MCString *);U0 *(*parse)(U0 *,U0 *);U0 (*freeAsset)(U0 *,U0 *);U0 (*freeRoot)(U0 *,U0 *);I32 (*size)(U0 *,U0 *);U0 *(*at)(U0 *,U0 *,I32);U0 *(*field)(U0 *,U0 *,U8 *);F32 (*asFloat)(U0 *,U0 *);U0 (*asString)(U0 *,U0 *,MCString *);};
+class MCTileRenderHost015 {U0 *host;U0 (*dispatch)(U0 *,U0 *,F32,F32,F32,F32);};
+class MCNineHost015 {U0 *host;U0 (*bind)(U0 *,MCString *);U0 (*begin)(U0 *,I32);U0 (*offset)(U0 *,F32,F32,F32);U0 (*vertexUV)(U0 *,F32,F32,F32,F32,F32);U0 (*draw)(U0 *,Bool);};
+class MCXperiaHost015 {U0 *host;Bool hideGUI,currentScreen;F32 guiScale,invGuiScale,deviceScale;I32 configWidth;I32 (*makeColor)(U0 *,I32,I32);Bool (*flying)(U0 *,U0 *);Bool (*touched)(U0 *,I32);Bool (*mouseDown)(U0 *,I32);I32 (*mouseX)(U0 *);I32 (*mouseY)(U0 *);U0 (*clickSound)(U0 *);U0 (*chatScreen)(U0 *);U0 (*begin)(U0 *,I32);U0 (*color)(U0 *,I32);U0 (*vertex)(U0 *,F32,F32,F32,F32,F32);U0 (*bind)(U0 *,U8 *);U0 (*draw)(U0 *,Bool);};
+#endif

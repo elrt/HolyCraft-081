@@ -1,0 +1,1 @@
+class Touch_THeader {Button base;I32 textX;};U0 Touch_THeader_Init(Touch_THeader *,MCGuiHost011 *,I32,I32,I32,I32,I32,U8 *);U0 Touch_THeader_render(Touch_THeader *,I32,I32);U0 Touch_THeader_renderBg(Button *,I32,I32);U0 Touch_THeader_Destroy(Touch_THeader *);

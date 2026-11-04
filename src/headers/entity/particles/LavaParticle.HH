@@ -1,0 +1,1 @@
+class LavaParticle {Particle base;F32 originalScale;};U0 LavaParticle_Init(LavaParticle *,MCParticleHost011 *,I32,U8 *);U0 LavaParticle_init(Particle *,F32,F32,F32,F32,F32,F32,I32);U0 LavaParticle_tick(Particle *);U0 LavaParticle_render(LavaParticle *,F32,F32,F32,F32,F32,F32);F32 LavaParticle_getBrightness(LavaParticle *,F32);

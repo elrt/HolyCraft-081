@@ -1,0 +1,1 @@
+class Touch_TButton {Button base;U0 *normal,*highlight;};U0 Touch_TButton_Init(Touch_TButton *,MCGuiHost011 *,I32,I32,I32,I32,I32,U8 *,Bool);U0 Touch_TButton_initPatches(Touch_TButton *,U8 *,IntRectangle *,IntRectangle *,I32,I32,I32,I32);U0 Touch_TButton_renderBg(Button *,I32,I32);U0 Touch_TButton_Destroy(Touch_TButton *);

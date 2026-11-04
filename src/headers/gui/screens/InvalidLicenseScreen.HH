@@ -1,0 +1,2 @@
+class InvalidLicenseScreen {MCLicenseHost015 *host;I32 err,titleY;Bool quitMode;MCString line1,line2,line3;U0 *okButton,*buyButton;};
+U0 InvalidLicenseScreen_Init(InvalidLicenseScreen *,MCLicenseHost015 *,I32,Bool);U0 InvalidLicenseScreen_Destroy(InvalidLicenseScreen *);U0 InvalidLicenseScreen_render(InvalidLicenseScreen *,I32,I32,F32);U0 InvalidLicenseScreen_init(InvalidLicenseScreen *);U0 InvalidLicenseScreen_setupPositions(InvalidLicenseScreen *);U0 InvalidLicenseScreen_tick(InvalidLicenseScreen *);U0 InvalidLicenseScreen_buttonClicked(InvalidLicenseScreen *,I32);

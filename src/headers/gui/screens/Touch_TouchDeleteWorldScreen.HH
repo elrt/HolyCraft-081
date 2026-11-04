@@ -1,0 +1,1 @@
+class Touch_TouchDeleteWorldScreen {ConfirmScreen base;LevelSummary summary;};U0 Touch_TouchDeleteWorldScreen_Init(Touch_TouchDeleteWorldScreen *,MCGuiHost014 *,LevelSummary *);U0 Touch_TouchDeleteWorldScreen_Destroy(Touch_TouchDeleteWorldScreen *);U0 Touch_TouchDeleteWorldScreen_postResult(ConfirmScreen *,Bool);

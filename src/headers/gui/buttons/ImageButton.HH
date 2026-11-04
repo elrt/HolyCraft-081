@@ -1,0 +1,2 @@
+class ImageButton {Button base;ImageDef image;Color4 color;Bool shrink;I32 yOffset;Bool (*secondFn)(ImageButton *,Bool);};
+U0 ImageButton_Init(ImageButton *,MCGuiHost011 *,I32,U8 *,ImageDef *);U0 ImageButton_Destroy(ImageButton *);U0 ImageButton_setImageDef(ImageButton *,ImageDef *,Bool);U0 ImageButton_render(ImageButton *,I32,I32);U0 ImageButton_setupDefault(ImageButton *);Bool ImageButton_isSecondImage(ImageButton *,Bool);U0 ImageButton_emptyBg(Button *,I32,I32);

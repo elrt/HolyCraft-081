@@ -1,0 +1,3 @@
+// minecraftpe/headers/entity/particles/Particle.hpp
+class Particle {MCParticleHost011 *host;I32 type;U8 *atlas;F32 coordMultiplier;I32 maxAliveTime;TextureUVCoordinateSet texture;F32 field_138,field_13C;I32 ticksAlive;F32 scale,gravity,r,g,b;F32 x,y,z,prevX,prevY,prevZ,mx,my,mz,width,height,ridingHeight;Bool dead,onGround,noclip,fullBright;U0 *derived;U0 (*initFn)(Particle *,F32,F32,F32,F32,F32,F32,I32);U0 (*tickFn)(Particle *);};
+U0 Particle_Init(Particle *,MCParticleHost011 *,I32,U8 *);U0 Particle_start(Particle *,F32,F32,F32,F32,F32,F32,I32);U0 Particle_scale(Particle *,F32);Particle *Particle_setPower(Particle *,F32);U0 Particle_tick(Particle *);U0 Particle_render(Particle *,F32,F32,F32,F32,F32,F32);I32 Particle_getEntityTypeId(Particle *);

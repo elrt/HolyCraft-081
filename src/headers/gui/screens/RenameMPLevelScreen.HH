@@ -1,0 +1,1 @@
+class RenameMPLevelScreen {MCGuiHost014 *host;MCString name;};U0 RenameMPLevelScreen_Init(RenameMPLevelScreen *,MCGuiHost014 *,MCString *);U0 RenameMPLevelScreen_Destroy(RenameMPLevelScreen *);U0 RenameMPLevelScreen_render(RenameMPLevelScreen *,I32,I32,F32);U0 RenameMPLevelScreen_init(RenameMPLevelScreen *);

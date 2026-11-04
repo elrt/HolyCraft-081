@@ -1,0 +1,1 @@
+class BreakDoorGoal {DoorInteractGoal base;I32 ticksLeft;};U0 BreakDoorGoal_Init(BreakDoorGoal *,MCDoorHost012 *);Bool BreakDoorGoal_canUse(Goal *);Bool BreakDoorGoal_canContinueToUse(Goal *);U0 BreakDoorGoal_start(Goal *);U0 BreakDoorGoal_tick(Goal *);

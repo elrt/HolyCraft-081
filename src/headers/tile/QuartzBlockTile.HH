@@ -1,0 +1,1 @@
+class QuartzBlockTile {MCTileHost012 *host;I32 id;TextureUVCoordinateSet textures[7];};U0 QuartzBlockTile_Init(QuartzBlockTile *,MCTileHost012 *,I32);TextureUVCoordinateSet *QuartzBlockTile_getTexture(QuartzBlockTile *,I32,I32);U8 *QuartzBlockTile_getDescriptionId(QuartzBlockTile *,I32);I32 QuartzBlockTile_getSpawnResourcesAuxValue(QuartzBlockTile *,I32);

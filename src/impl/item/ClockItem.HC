@@ -1,0 +1,4 @@
+// Inline implementation from ClockItem.hpp; ClockItem.cpp contains only #include.
+U0 ClockItem_Init(ClockItem *s,MCItemContext010 *c,I32 id) { I32 row,col,idx;TextureUVCoordinateSet *t;MCItem009_Init(&s->base,c->items,id);TextureUVCoordinateSet_DefaultInit(&s->icon);s->itemTexture="watch-atlas.png";s->frames=64;for(row=0;row<8;row++)for(col=0;col<8;col++) { idx=row+8*col;t=&s->textures[idx];t->minY=row*0.125;t->maxY=(row+1)*0.125;t->height=128;t->width=128;t->minX=col*0.125;t->maxX=(col+1)*0.125; } }
+TextureUVCoordinateSet *ClockItem_getIcon(ClockItem *s,I32 frame,Bool carried) { if(carried)return &s->icon;if(frame<0 || frame>=64) { printf("ClockItem invalid frame\n");exit(98); }return &s->textures[frame]; }
+I32 ClockItem_getAnimationFrameFor(ClockItem *s,F32 time) { return time*s->frames; }

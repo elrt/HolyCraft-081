@@ -1,0 +1,9 @@
+// Batch025 partial source API; contracts/omissions in docs/BATCH025.md
+U0 ItemInHandRenderer_Init(ItemInHandRenderer *s,MCRegistry023 *r,Tesselator *t){memset(s,0,sizeof(ItemInHandRenderer));ItemInstance_Init(&s->item,r,0,1,0);s->tesselator=t;}
+U0 ItemInHandRenderer_tick(ItemInHandRenderer *s,ItemInstance *selected){s->previousEquip=s->equip;if(selected && !ItemInstance_isNull(selected))s->item=*selected;else ItemInstance_setNull(&s->item);F32 d=1-s->equip;if(d < -0.4)d=-0.4;else if(d>0.4)d=0.4;s->equip+=d;}
+U0 ItemInHandRenderer_itemPlaced(ItemInHandRenderer *s){s->equip=0;}
+U0 ItemInHandRenderer_itemUsed(ItemInHandRenderer *s){s->equip=0;}
+I32 ItemInHandRenderer_getFrameID(ItemInstance *item,I32 entityType,I32 animationFrame){I32 id=ItemInstance_getId(item);if(item->itemClass && item->itemClass->stackedByData)id|=item->metadata(U16)<<12;id|=entityType<<16;id|=animationFrame<<24;return id;}
+U0 ItemInHandRenderer_renderTex(ItemInHandRenderer *s,TextureUVCoordinateSet *uv){Tesselator *t=s->tesselator;Tesselator_begin(t,7);Tesselator_color(t,0.3*255,0.3*255,0.3*255,0.5*255);F32 xs[4]={-1,0,0,-1},ys[4]={-1,-1,0,0};I32 i;for(i=0;i<4;i++){F32 x=xs[i],y=ys[i];Tesselator_vertexUV(t,x,y,-0.5,uv->maxX,uv->maxY);Tesselator_vertexUV(t,x+1,y,-0.5,uv->minX,uv->maxY);Tesselator_vertexUV(t,x+1,y+1,-0.5,uv->minX,uv->minY);Tesselator_vertexUV(t,x,y+1,-0.5,uv->maxX,uv->minY);}Tesselator_end(t);}
+U0 ItemInHandRenderer_renderWater(ItemInHandRenderer *s,F32 yaw,F32 pitch,F32 brightness){Tesselator *t=s->tesselator;F32 u=-yaw*0.015625,v=pitch*0.015625;Tesselator_begin(t,7);Tesselator_color(t,brightness*255,brightness*255,brightness*255,0.5*255);Tesselator_vertexUV(t,-1,-1,-0.5,u+4,v+4);Tesselator_vertexUV(t,1,-1,-0.5,u,v+4);Tesselator_vertexUV(t,1,1,-0.5,u,v);Tesselator_vertexUV(t,-1,1,-0.5,u+4,v);Tesselator_end(t);}
+F32 ItemInHandRenderer_getEquip(ItemInHandRenderer *s,F32 partial){return s->previousEquip+(s->equip-s->previousEquip)*partial;}

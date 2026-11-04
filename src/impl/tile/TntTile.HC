@@ -1,0 +1,7 @@
+U0 TntTile_Init(TntTile *s,I32 id,TextureUVCoordinateSet *side,TextureUVCoordinateSet *top,TextureUVCoordinateSet *bottom){s->blockID=id;s->side=*side;s->top=*top;s->bottom=*bottom;}
+TextureUVCoordinateSet *TntTile_getTexture(TntTile *s,I32 side){if(!side)return &s->bottom;if(side==1)return &s->top;return &s->side;}
+U0 TntTile_destroy(TntTile *s,MCTntHost015 *h,I32 x,I32 y,I32 z,I32 meta){U0 *e;if(!h->isClient&&(meta&1)){e=h->newPrimed(h->host,(x(F32)+0.5)(F32),(y(F32)+0.5)(F32),(z(F32)+0.5)(F32));h->addEntity(h->host,e);h->sound(h->host,e,"random.fuse",(1.0)(F32),(1.0)(F32));}}
+U0 TntTile_neighborChanged(TntTile *s,MCTntHost015 *h,I32 x,I32 y,I32 z,I32 neighbor){if(neighbor>0&&h->signalSource(h->host,neighbor)&&h->signal(h->host,x,y,z)){TntTile_destroy(s,h,x,y,z,1);h->setTile(h->host,x,y,z,0,3);}}
+I32 TntTile_getResourceCount(TntTile *s){return 1;}
+U0 TntTile_wasExploded(TntTile *s,MCTntHost015 *h,I32 x,I32 y,I32 z){U0 *e=h->newPrimed(h->host,(x(F32)+0.5)(F32),(y(F32)+0.5)(F32),(z(F32)+0.5)(F32));I32 fuse=h->getFuse(h->host,e);U32 div=fuse/4,r;if(!div){printf("TntTile: original modulo by zero\n");exit(98);}r=h->random(h->host);h->setFuse(h->host,e,r%div+fuse/8);h->addEntity(h->host,e);}
+Bool TntTile_use(TntTile *s,MCTntHost015 *h,I32 x,I32 y,I32 z,U0 *player){U0 *it=h->selectedItem(h->host,player);if(!it||!h->flint||h->itemClass(h->host,it)!=h->flint)return h->baseUse(h->host,x,y,z,player);if(!h->instabuild(h->host,player))h->hurt(h->host,it,1,player);TntTile_destroy(s,h,x,y,z,1);h->setTile(h->host,x,y,z,0,3);return TRUE;}

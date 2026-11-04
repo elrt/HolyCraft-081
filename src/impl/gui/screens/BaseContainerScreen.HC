@@ -1,0 +1,2 @@
+// Original virtual methods are inline in the header.
+U0 BaseContainerScreen_init(BaseContainerScreen *s){s->host->screenInit(s->host->host);s->host->setCurrentContainer(s->host->host,s->menu);}U0 BaseContainerScreen_tick(BaseContainerScreen *s){MCScreenHost012 *h=s->host;h->screenTick(h->host);if(!h->playerAlive(h->host) || h->playerDead(h->host))h->closeContainer(h->host);}Bool BaseContainerScreen_closeOnPlayerHurt(BaseContainerScreen *s){return TRUE;}

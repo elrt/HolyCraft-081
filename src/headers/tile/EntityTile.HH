@@ -1,0 +1,1 @@
+class EntityTile {MCTileHost011 *host;I32 id;};U0 EntityTile_Init(EntityTile *,MCTileHost011 *,I32);U0 EntityTile_onPlace(EntityTile *,I32,I32,I32);U0 EntityTile_onRemove(EntityTile *,I32,I32,I32);U0 EntityTile_triggerEvent(EntityTile *,I32,I32,I32,I32,I32);U0 *EntityTile_newTileEntity(EntityTile *);

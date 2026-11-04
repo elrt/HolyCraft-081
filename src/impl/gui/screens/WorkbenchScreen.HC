@@ -1,0 +1,1 @@
+U0 WorkbenchScreen_Init(WorkbenchScreen *s,MCScreenHost012 *h,I32 n){s->host=h;s->base=h->createCraftingBase(h->host,n);}U0 WorkbenchScreen_Destroy(WorkbenchScreen *s){s->host->destroyCraftingBase(s->host->host,s->base);}Bool WorkbenchScreen_filterRecipe(WorkbenchScreen *s,MCFilterItem009 *result,MCFilterTiles009 *tiles){return !CraftingFilters_isStonecutterItem(result,tiles);}

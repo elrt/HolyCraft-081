@@ -1,0 +1,1 @@
+class RailTile {MCTileHost011 *host;I32 id;TextureUVCoordinateSet normal,turned;};U0 RailTile_Init(RailTile *,MCTileHost011 *,I32,TextureUVCoordinateSet *);TextureUVCoordinateSet *RailTile_getTexture(RailTile *,I32);U0 RailTile_updateState(RailTile *,I32,I32,I32,I32);

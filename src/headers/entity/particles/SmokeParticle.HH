@@ -1,0 +1,1 @@
+class SmokeParticle {Particle base;F32 originalScale;};U0 SmokeParticle_Init(SmokeParticle *,MCParticleHost011 *,I32,U8 *);U0 SmokeParticle_init(Particle *,F32,F32,F32,F32,F32,F32,I32);U0 SmokeParticle_tick(Particle *);U0 SmokeParticle_render(SmokeParticle *,F32,F32,F32,F32,F32,F32);

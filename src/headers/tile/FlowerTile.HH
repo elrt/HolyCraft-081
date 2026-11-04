@@ -1,0 +1,1 @@
+class FlowerTile {MCTileHost013 *host;I32 id;};U0 FlowerTile_Init(FlowerTile *,MCTileHost013 *,I32);Bool FlowerTile_randomWalk(FlowerTile *,I32 *,I32 *,I32 *,I32);Bool FlowerTile_onFertilized(FlowerTile *,I32,I32,I32);

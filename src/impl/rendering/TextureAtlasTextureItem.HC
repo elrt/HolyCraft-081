@@ -1,0 +1,11 @@
+// Batch 005. Source: minecraftpe/impl/rendering/TextureAtlasTextureItem.cpp
+U0 TextureAtlasTextureItem_Init(TextureAtlasTextureItem *self) { memset(self,0,sizeof(TextureAtlasTextureItem));MCString_FromC(&self->name,"error");self->uvCoords.minX=-1;self->uvCoords.maxY=-1;self->uvCoords.maxX=-1;self->uvCoords.width=0;self->uvCoords.height=0;MCVector_Init(&self->uv,sizeof(TextureUVCoordinateSet));MCVector_Push(&self->uv,&self->uvCoords);self->uvCount=1; }
+U0 TextureAtlasTextureItem_InitValues(TextureAtlasTextureItem *self,MCString *name,TextureUVCoordinateSet *uv,MCVector *additional) { MCString_CopyInit(&self->name,name);self->uvCoords=*uv;MCVector_Init(&self->uv,sizeof(TextureUVCoordinateSet));MCVector_Push(&self->uv,uv);I64 i;for(i=0;i<additional->size;i++)MCVector_Push(&self->uv,MCVector_At(additional,i));self->uvCount=self->uv.size; }
+U0 TextureAtlasTextureItem_CopyInit(TextureAtlasTextureItem *self,TextureAtlasTextureItem *other) { MCString_CopyInit(&self->name,&other->name);self->uvCoords=other->uvCoords;MCVector_Init(&self->uv,sizeof(TextureUVCoordinateSet));I64 i;for(i=0;i<other->uv.size;i++)MCVector_Push(&self->uv,MCVector_At(&other->uv,i));self->uvCount=other->uvCount; }
+U0 TextureAtlasTextureItem_Destroy(TextureAtlasTextureItem *self) { MCString_Destroy(&self->name);MCVector_Destroy(&self->uv); }
+TextureAtlasTextureItem *TextureAtlasTextureItem_Assign(TextureAtlasTextureItem *self,TextureAtlasTextureItem *other) { if(self==other)return self;TextureAtlasTextureItem_Destroy(self);TextureAtlasTextureItem_CopyInit(self,other);return self; }
+U0 TextureAtlasTextureItem_MoveInit(TextureAtlasTextureItem *self,TextureAtlasTextureItem *other) { *self=*other;MCString_Init(&other->name);MCVector_Init(&other->uv,sizeof(TextureUVCoordinateSet));other->uvCount=0; }
+U0 TextureAtlasTextureItem_getName(TextureAtlasTextureItem *self) {}
+TextureUVCoordinateSet *TextureAtlasTextureItem_getUV(TextureAtlasTextureItem *self,I32 index) { if(index<=0)return &self->uvCoords;if(index>=self->uvCount)index=self->uvCount-1;if(index<0)return &self->uvCoords;return MCVector_At(&self->uv,index); }
+I32 TextureAtlasTextureItem_getUVCount(TextureAtlasTextureItem *self) { return self->uvCount; }
+

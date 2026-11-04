@@ -1,0 +1,1 @@
+class ServerLevel {MCServerHost014 *host;Bool allSleeping;};U0 ServerLevel_Init(ServerLevel *,MCServerHost014 *);Bool ServerLevel_allPlayersSleeping(ServerLevel *);U0 ServerLevel_awakenAllPlayers(ServerLevel *);U0 ServerLevel_tick(ServerLevel *);U0 ServerLevel_updateSleepingPlayerList(ServerLevel *);

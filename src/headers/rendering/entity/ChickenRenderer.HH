@@ -1,0 +1,1 @@
+class ChickenRenderer {MCMobRenderHost012 *host;U0 *base;};U0 ChickenRenderer_Init(ChickenRenderer *,MCMobRenderHost012 *,U0 *,F32);U0 ChickenRenderer_Destroy(ChickenRenderer *);F32 ChickenRenderer_getBob(ChickenRenderer *,F32,F32,F32,F32,F32);

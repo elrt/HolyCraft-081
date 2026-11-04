@@ -1,0 +1,68 @@
+--- a/minecraftpe/impl/AppPlatform_sdl.cpp	2026-10-31 10:34:11.000000000 +0000
++++ b/minecraftpe/impl/AppPlatform_sdl.cpp	2026-11-04 17:57:48.553854342 +0000
+@@ -117,6 +117,38 @@
+ 	return 1;
+ }
+ 
++// ---- HolyC-port compatibility test harness (test build only) ----
++#include <level/Level.hpp>
++#include <level/LevelSettings.hpp>
++#include <tile/entity/TileEntity.hpp>
++#include <tile/entity/ChestTileEntity.hpp>
++#include <tile/Tile.hpp>
++#include <item/Item.hpp>
++#include <item/ItemInstance.hpp>
++#include <stdlib.h>
++static int hx_frames=0,hx_setup=0;
++static void hx_dump(NinecraftApp* mc){
++	Level* l=mc->level;LocalPlayer* p=mc->player;
++	printf("HX player pos=%.2f,%.2f,%.2f health=%d creative=%d time=%d\n",p->posX,p->posY,p->posZ,p->health,(int)mc->isCreative,(int)l->getTime());
++	int counts[128]={0};for(size_t i=0;i<l->entities.size();i++){int t=l->entities[i]->getEntityTypeId();if(t>=0&&t<128)counts[t]++;}
++	printf("HX entities=%d",(int)l->entities.size());for(int t=0;t<128;t++)if(counts[t])printf(" t%d=%d",t,counts[t]);printf("\n");
++	printf("HX tileEntities=%d\n",(int)l->tileEntities.size());
++	for(size_t i=0;i<l->tileEntities.size();i++){TileEntity* te=l->tileEntities[i];printf("HX te type=%d at=%d,%d,%d\n",te->type,te->posX,te->posY,te->posZ);
++		if(te->type==2){ChestTileEntity* c=(ChestTileEntity*)te;int n=0,s=0;for(int k=0;k<c->getContainerSize();k++){ItemInstance* it=c->getItem(k);if(it&&it->count>0){n++;s+=it->getId()*100+it->count;}}printf("HX chest slots=%d sig=%d\n",n,s);}}
++	Inventory* inv=p->inventory;int n=0;long sig=0;for(int k=0;k<inv->getContainerSize();k++){ItemInstance* it=inv->getItem(k);if(it&&it->count>0){n++;sig+=(long)(k+1)*(it->getId()*1000+it->count);}}
++	printf("HX inventory items=%d sig=%ld\n",n,sig);
++	const char* pr=getenv("MCPE_ORIG_PROBE");if(pr){int x,y,z;if(sscanf(pr,"%d,%d,%d",&x,&y,&z)==3){long s=0;for(int dx=-8;dx<=8;dx++)for(int dz=-8;dz<=8;dz++)for(int yy=0;yy<128;yy++)s+=(long)l->getTile(x+dx,yy,z+dz)*(yy+1)+l->getData(x+dx,yy,z+dz);printf("HX probe %d,%d,%d sum=%ld\n",x,y,z,s);}}
++}
++static void hx_tick(NinecraftApp* mc){
++	if(!getenv("MCPE_ORIG_WORLD"))return;
++	if(!mc->levelGenerated||!mc->level||!mc->player)return;
++	hx_frames++;
++	if(hx_frames==20&&getenv("MCPE_ORIG_SETUP")&&!hx_setup){hx_setup=1;Level* l=mc->level;LocalPlayer* p=mc->player;int x=(int)floorf(p->posX)+2,y=(int)floorf(p->posY-1.62f+0.01f),z=(int)floorf(p->posZ);
++		l->setTile(x,y,z,Tile::chest->blockID,3);ChestTileEntity* c=(ChestTileEntity*)l->getTileEntity(x,y,z);if(c){c->setItem(0,new ItemInstance(Item::coal,7,0));c->setItem(5,new ItemInstance(Item::apple,3,0));}
++		p->inventory->add(new ItemInstance(Item::coal,11,0));printf("HX setup chest at %d,%d,%d ok=%d\n",x,y,z,c!=0);}
++	int lim=200;const char* f=getenv("MCPE_ORIG_FRAMES");if(f)lim=atoi(f);
++	if(hx_frames>=lim){hx_dump(mc);mc->level->saveGame();mc->leaveGame(0,0);printf("HX saved and left\n");fflush(stdout);exit(0);}
++}
+ bool fullscreen = 0;
+ int lastWidth = 0, lastHeight = 0;
+ void AppPlatform_sdl::onKeyPressed(Minecraft* mc, SDLKey key, bool pressed) {
+@@ -334,6 +366,7 @@
+ 			hasInit = 1;
+ 			mc->init();
+ 			mc->setSize(this->screenWidth, this->screenHeight);
++			if(getenv("MCPE_ORIG_WORLD")){const char* w=getenv("MCPE_ORIG_WORLD");int seed=getenv("MCPE_ORIG_SEED")?atoi(getenv("MCPE_ORIG_SEED")):12345;mc->selectLevel(w,w,LevelSettings(seed,getenv("MCPE_ORIG_CREATIVE")?1:0));printf("HX selectLevel %s\n",w);}
+ 			//mc->currentScreen->init(mc, this->screenWidth, this->screenHeight);
+ 		}
+ 
+@@ -352,6 +385,7 @@
+ 		}
+ 
+ 		prevMGrabbed = mc->mouseGrabbed;
++		hx_tick(mc);
+ 
+ 
+ 		while(SDL_PollEvent(&this->sdl_event)){
+--- a/minecraftpe/CMakeLists.txt	2026-10-31 10:34:11.000000000 +0000
++++ b/minecraftpe/CMakeLists.txt	2026-11-04 17:30:43.325341897 +0000
+@@ -17,7 +17,7 @@
+ endif()
+ 
+ find_package(ZLIB REQUIRED)
+-add_compile_options(-Wno-out-of-line-declaration -Wno-write-strings -Werror=infinite-recursion -Werror=return-type)
++add_compile_options(-Wno-write-strings -fpermissive -w)
+ add_compile_options(-DDIFFERENTTWEAKS)
+ if(ANDROID)
+ 	add_compile_options(-DUSEGLES -DIMTOOLAZYTOFIX16ERRS)

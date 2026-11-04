@@ -1,0 +1,1 @@
+U0 Container_getSlotCopies(MCContainer011 *s,MCVector *out){I32 i,n=s->size(s->host);MCPacketItem009 *it,empty;memset(&empty,0,sizeof(empty));empty.valid=TRUE;MCVector_Init(out,sizeof(MCPacketItem009));for(i=0;i<n;i++){it=s->get(s->host,i);if(it)MCVector_Push(out,it);else MCVector_Push(out,&empty);}}

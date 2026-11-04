@@ -1,0 +1,7 @@
+// Batch025 partial source API; contracts/omissions in docs/BATCH025.md
+U0 MobSpawner_Init(MobSpawner *s){memset(s,0,sizeof(MobSpawner));Random_setSeed(&s->babyRandom,0x5deea8f);}
+U0 MobSpawner_getRandomPosWithin(Level *level,I32 x,I32 z,I32 *out){out[0]=x+(Random_genrand_int32(&level->world.random)&15);out[1]=Random_genrand_int32(&level->world.random)&127;out[2]=z+(Random_genrand_int32(&level->world.random)&15);}
+Bool MobSpawner_isSpawnPositionOk(Level *level,Bool water,I32 x,I32 y,I32 z){MCWorld023 *w=&level->world;if(water){if(!(MC023_Material(w,x,y,z)==3 || MC023_Material(w,x,y,z)==4))return FALSE;}else{if(!MC023_Solid(w,x,y-1,z) || MC023_Solid(w,x,y,z) || (MC023_Material(w,x,y,z)==3 || MC023_Material(w,x,y,z)==4))return FALSE;}return !MC023_Solid(w,x,y+1,z);}
+U0 MobSpawner_makeBabyMob(MobSpawner *s,Mob *mob,F32 chance){if(mob->baseType==2 && Random_nextFloat(&s->babyRandom)<chance)mob->growingAge=-24000;}
+Bool MobSpawner_addMob(MobSpawner *s,Level *level,Mob *mob,F32 x,F32 y,F32 z,F32 yaw,F32 pitch,Bool force,Bool canSpawn){Entity_moveTo(&mob->entity,x,y,z,yaw,pitch);if(!force && !canSpawn)return FALSE;Level_addEntity(level,&mob->entity.body);MobSpawner_makeBabyMob(s,mob,0.5);return TRUE;}
+U0 MobSpawner_pollChunks(MobSpawner *s,Bool animals,F32 playerX,F32 playerZ){memset(s->chunksToPoll,0,256);I32 x,z,cx=floorf(playerX*0.0625),cz=floorf(playerZ*0.0625);if(animals){memset(s->chunksToPoll,1,256);return;}for(x=cx-8;x<=cx+8;x++)for(z=cz-8;z<=cz+8;z++)if(x>=0 && x<16 && z>=0 && z<16)s->chunksToPoll[x*16+z]=1;}

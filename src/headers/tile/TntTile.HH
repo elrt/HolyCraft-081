@@ -1,0 +1,2 @@
+class TntTile {I32 blockID;TextureUVCoordinateSet side,top,bottom;};
+U0 TntTile_Init(TntTile *,I32,TextureUVCoordinateSet *,TextureUVCoordinateSet *,TextureUVCoordinateSet *);TextureUVCoordinateSet *TntTile_getTexture(TntTile *,I32);U0 TntTile_destroy(TntTile *,MCTntHost015 *,I32,I32,I32,I32);U0 TntTile_neighborChanged(TntTile *,MCTntHost015 *,I32,I32,I32,I32);I32 TntTile_getResourceCount(TntTile *);U0 TntTile_wasExploded(TntTile *,MCTntHost015 *,I32,I32,I32);Bool TntTile_use(TntTile *,MCTntHost015 *,I32,I32,I32,U0 *);

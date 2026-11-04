@@ -1,0 +1,6 @@
+U0 CreativeMode_Init(CreativeMode *s,MCCreativeHost015 *h){s->host=h;s->delay=0;}
+U0 CreativeMode_creativeDestroyBlock(CreativeMode *s,I32 x,I32 y,I32 z,I32 side){s->host->extinguish(s->host->host,x,y,z,side);s->host->destroyBlock(s->host->host,x,y,z,side);}
+U0 CreativeMode_startDestroyBlock(CreativeMode *s,U0 *player,I32 x,I32 y,I32 z,I32 side){MCCreativeHost015 *h=s->host;U0 *item=h->carried(h->host,player);if(!item||!h->bow||h->itemClass(h->host,item)!=h->bow){CreativeMode_creativeDestroyBlock(s,x,y,z,side);s->delay=10;}}
+U0 CreativeMode_continueDestroyBlock(CreativeMode *s,I32 x,I32 y,I32 z,I32 side){if(s->delay-1<=0){s->delay=10;CreativeMode_creativeDestroyBlock(s,x,y,z,side);}else s->delay--;}
+U0 CreativeMode_stopDestroyBlock(CreativeMode *s){}Bool CreativeMode_isCreativeType(CreativeMode *s){return TRUE;}U0 CreativeMode_initAbilities(CreativeMode *s,Abilities *a){a->mayfly=TRUE;a->instabuild=TRUE;a->invulnerable=TRUE;}
+U0 CreativeMode_releaseUsingItem(CreativeMode *s,U0 *player){MCCreativeHost015 *h=s->host;U0 *item,*cls;I32 aux;item=h->carried(h->host,player);if(item){cls=h->itemClass(h->host,item);aux=h->aux(h->host,player);h->releaseBase(h->host,player);item=h->carried(h->host,player);if(item&&cls&&cls==h->itemClass(h->host,item))h->setAux(h->host,item,aux);}else h->releaseBase(h->host,player);}

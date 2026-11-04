@@ -1,0 +1,1 @@
+class ItemDiffer {MCItemDiffHost014 *host;I32 len;MCVector items;};U0 ItemDiffer_Init(ItemDiffer *,MCItemDiffHost014 *,MCVector *);U0 ItemDiffer_getDiff(ItemDiffer *,MCVector *,MCVector *);U0 ItemDiffer_Destroy(ItemDiffer *);

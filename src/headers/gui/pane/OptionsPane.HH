@@ -1,0 +1,1 @@
+class OptionsPane {MCScreenHost012 *host;U0 *base;};U0 OptionsPane_Init(OptionsPane *,MCScreenHost012 *);U0 OptionsPane_Destroy(OptionsPane *);U0 *OptionsPane_createOptionsGroup(OptionsPane *,U8 *);U0 OptionsPane_setupPositions(OptionsPane *);

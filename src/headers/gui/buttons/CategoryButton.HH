@@ -1,0 +1,1 @@
+class CategoryButton {ImageButton base;Button **selected;U0 *normal,*highlight;};U0 CategoryButton_Init(CategoryButton *,MCGuiHost011 *,I32,U8 *,U0 *,U0 *,Button **);U0 CategoryButton_renderBg(Button *,I32,I32);Bool CategoryButton_isSecondImage(ImageButton *,Bool);U0 CategoryButton_Destroy(CategoryButton *);

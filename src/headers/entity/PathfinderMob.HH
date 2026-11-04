@@ -1,0 +1,3 @@
+// Batch023: entity/PathfinderMob; explicit simulation ABI, see docs/BATCH023.md.
+class PathfinderMob: MCBody023 {MCVector path;I32 pathIndex,panicTicks,noActionTime,attackTarget;Bool holdGround,jumping,collidedH,newAI;F32 baseSpeed,forward,strafe;U0 *navigationContext;Bool (*findPath)(U0*,PathfinderMob*,F32,F32,F32,F32,MCVector*);F32 (*walkValue)(U0*,I32,I32,I32);};
+U0 PathfinderMob_Init(PathfinderMob*,MCWorld023*);U0 PathfinderMob_Destroy(PathfinderMob*);F32 PathfinderMob_getWalkingSpeedModifier(PathfinderMob*);U0 PathfinderMob_stroll(PathfinderMob*);U0 PathfinderMob_updateAi(PathfinderMob*);

@@ -1,0 +1,1 @@
+class CarrotTile {MCTileHost011 *host;I32 id;TextureUVCoordinateSet textures[4];};U0 CarrotTile_Init(CarrotTile *,MCTileHost011 *,I32);TextureUVCoordinateSet *CarrotTile_getTexture(CarrotTile *,I32);U0 CarrotTile_spawnResources(CarrotTile *,I32,I32,I32,I32,F32);I32 CarrotTile_getBasePlantId(CarrotTile *);I32 CarrotTile_getBaseSeed(CarrotTile *);

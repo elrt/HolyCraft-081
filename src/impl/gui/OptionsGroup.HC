@@ -1,0 +1,6 @@
+// Batch022: gui/OptionsGroup; explicit host ABI, see docs/BATCH022.md.
+U0 OptionsGroup_Init(OptionsGroup *s,MCString *title,MC022DrawHost *h) {MC022_Box(&s->bounds,0,0,24,24);MCString_CopyInit(&s->title,title);MCVector_Init(&s->rows,sizeof(MC022OptionRow));s->host=h;}
+U0 OptionsGroup_Destroy(OptionsGroup *s) {MCString_Destroy(&s->title);MCVector_Destroy(&s->rows);}
+U0 OptionsGroup_setupPositions(OptionsGroup *s) {if(!s->rows.size){s->bounds.h=0;return;}I32 y=s->bounds.y+10,total=10;I64 i;MC022OptionRow *r=s->rows.data(MC022OptionRow*);for(i=0;i<s->rows.size;i++){r[i].box.x=s->bounds.x+10;r[i].box.y=y;r[i].box.w=s->bounds.w-5;MC022OptionRow *row=&r[i];if(row->layout!=NULL)row->layout(row->ctx,&row->box);y+=r[i].box.h+3;total+=r[i].box.h+3;}s->bounds.h=total;}
+Bool OptionsGroup_addOption(OptionsGroup *s,I32 type,Bool hidden,I32 height,U0 *ctx,U0 (*layout)(U0*,MC022Box*)) {if(hidden || type<0 || type>4)return FALSE;MC022OptionRow row;MC022_Box(&row.box,0,0,100,height);row.type=type;row.ctx=ctx;row.layout=layout;MCVector_Push(&s->rows,&row);OptionsGroup_setupPositions(s);return TRUE;}
+U0 OptionsGroup_render(OptionsGroup *s) {if(s->rows.size)MC022_Text(s->host,MCString_CStr(&s->title),s->bounds.x+2,s->bounds.y,0xFFFFFFFF,TRUE);}

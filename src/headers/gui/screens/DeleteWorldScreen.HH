@@ -1,0 +1,1 @@
+class DeleteWorldScreen {ConfirmScreen base;LevelSummary summary;};U0 DeleteWorldScreen_Init(DeleteWorldScreen *,MCGuiHost014 *,LevelSummary *);U0 DeleteWorldScreen_Destroy(DeleteWorldScreen *);U0 DeleteWorldScreen_postResult(ConfirmScreen *,Bool);

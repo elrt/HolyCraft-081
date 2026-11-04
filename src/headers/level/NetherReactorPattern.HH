@@ -1,0 +1,1 @@
+class NetherReactorPattern {I32 pattern[27];};U0 NetherReactorPattern_Init(NetherReactorPattern *,I32,I32,I32);I32 NetherReactorPattern_getTileAt(NetherReactorPattern *,I32,I32,I32);U0 NetherReactorPattern_setTileAt(NetherReactorPattern *,I32,I32,I32,I32);

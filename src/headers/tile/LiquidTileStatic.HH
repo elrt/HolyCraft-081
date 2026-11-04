@@ -1,0 +1,1 @@
+class LiquidTileStatic {MCTileHost013 *host;I32 id;Bool isLava,ticking;};U0 LiquidTileStatic_Init(LiquidTileStatic *,MCTileHost013 *,I32,Bool);U0 LiquidTileStatic_setDynamic(LiquidTileStatic *,I32,I32,I32);U0 LiquidTileStatic_tick(LiquidTileStatic *,I32,I32,I32,Random *);U0 LiquidTileStatic_neighborChanged(LiquidTileStatic *,I32,I32,I32);

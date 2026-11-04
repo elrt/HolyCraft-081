@@ -1,0 +1,1 @@
+class SimpleFoodData {I32 currentLevel;};U0 SimpleFoodData_Init(SimpleFoodData *);U0 SimpleFoodData_eat(SimpleFoodData *,I32);U0 SimpleFoodData_eatFood(SimpleFoodData *,FoodItem *);U0 SimpleFoodData_tick(SimpleFoodData *,U0 *,Bool (*isHurt)(U0 *),U0 (*heal)(U0 *,I32));

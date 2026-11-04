@@ -1,0 +1,5 @@
+// Inline original implementation from TargetGoal.hpp.
+U0 TargetGoal_Init(TargetGoal *s,MCGoalHost012 *h,F32 radius,I8 check){Goal_Init(&s->base);s->base.context=s;s->host=h;s->radius=radius;s->checkVisibility=check;s->base.continueFn=&TargetGoal_canContinueToUse;s->base.stopFn=&TargetGoal_stop;}
+Bool TargetGoal_canAttack(TargetGoal *s,MCGoalEntity012 *e,Bool ignoreInvulnerability){MCGoalHost012 *h=s->host;if(!e || e->identity==h->self->identity || !e->alive)return FALSE;if(!(e->maxY>h->self->minY && e->minY<h->self->maxY))return FALSE;if(e->isPlayer && !ignoreInvulnerability && e->invulnerable)return FALSE;if(!s->checkVisibility)return TRUE;return h->canSee(h->host,e);}
+Bool TargetGoal_canContinueToUse(Goal *g){TargetGoal *s=g->context;MCGoalHost012 *h=s->host;MCGoalEntity012 *e=h->currentTarget(h->host);if(!e || !e->alive || !(h->distanceSqr(h->host,e)<=s->radius*s->radius))return FALSE;if(!s->checkVisibility)return TRUE;return h->canSee(h->host,e);}
+U0 TargetGoal_stop(Goal *g){TargetGoal *s=g->context;s->host->setTarget(s->host->host,NULL);}

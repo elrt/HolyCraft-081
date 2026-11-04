@@ -1,0 +1,1 @@
+class PlayScreenStateSetting {Bool showEditButton,field_1,field_2,field_3,showNewButton,showExternalButton;I8 field_6,field_7;I32 panel;MCString field_C;};U0 PlayScreenStateSetting_Init(PlayScreenStateSetting *);U0 PlayScreenStateSetting_InitValues(PlayScreenStateSetting *,Bool,Bool,Bool,Bool,Bool,Bool,I32);U0 PlayScreenStateSetting_Destroy(PlayScreenStateSetting *);

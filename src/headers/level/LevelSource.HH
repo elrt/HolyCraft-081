@@ -1,0 +1,2 @@
+// Abstract world read interface. No base implementation exists in the original.
+class LevelSource {U0 *host;I32 (*getTile)(U0 *,I32,I32,I32);Bool (*isEmptyTile)(U0 *,I32,I32,I32);F32 (*getBrightness)(U0 *,I32,I32,I32);I32 (*getData)(U0 *,I32,I32,I32);Material *(*getMaterial)(U0 *,I32,I32,I32);Bool (*isSolidRenderTile)(U0 *,I32,I32,I32);Bool (*isSolidBlockingTile)(U0 *,I32,I32,I32);U0 *(*getBiome)(U0 *,I32,I32);};

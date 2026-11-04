@@ -1,0 +1,2 @@
+// Batch 009: minecraftpe/impl/crafting/CraftingFilters.cpp
+Bool CraftingFilters_isStonecutterItem(MCFilterItem009 *item,MCFilterTiles009 *tiles) { if(!item->hasTile || item->tileID==tiles->lapisBlock || item->tileID==tiles->furnace || item->tileID==tiles->stonecutterBench || (item->tileID==tiles->stoneSlabHalf && item->aux==2))return FALSE;return item->material==tiles->stone || item->material==tiles->sand; }

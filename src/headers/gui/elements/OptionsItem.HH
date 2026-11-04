@@ -1,0 +1,1 @@
+class OptionsItem {GuiElementContainer base;U0 *option;};U0 OptionsItem_Init(OptionsItem *,MCGuiHost011 *,U0 *,MCGuiChild011 *);U0 OptionsItem_render(OptionsItem *,I32,I32);U0 OptionsItem_setupPositions(OptionsItem *);U0 OptionsItem_Destroy(OptionsItem *);

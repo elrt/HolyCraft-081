@@ -1,0 +1,3 @@
+// Batch023: entity/player/gamemode/GameMode; explicit simulation ABI, see docs/BATCH023.md.
+class GameMode {MCWorld023 *w;MCPlayer023 *player;F32 previousProgress,progress;I32 hits,delay;Bool creative;};
+U0 GameMode_Init(GameMode*,MCWorld023*,MCPlayer023*);Bool GameMode_destroyBlock(GameMode*,I32,I32,I32,I32);U0 GameMode_startDestroyBlock(GameMode*,I32,I32,I32,I32);U0 GameMode_tick(GameMode*);F32 GameMode_render(GameMode*,F32);Bool GameMode_useItem(GameMode*,ItemInstance*);Bool GameMode_useItemOn(GameMode*,I32,I32,I32,I32,Vec3*);U0 GameMode_attack(GameMode*,MCBody023*);U0 GameMode_interact(GameMode*,MCBody023*);U0 GameMode_releaseUsingItem(GameMode*);

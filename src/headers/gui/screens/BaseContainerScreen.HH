@@ -1,0 +1,1 @@
+class BaseContainerScreen {MCScreenHost012 *host;U0 *menu;};U0 BaseContainerScreen_init(BaseContainerScreen *);U0 BaseContainerScreen_tick(BaseContainerScreen *);Bool BaseContainerScreen_closeOnPlayerHurt(BaseContainerScreen *);

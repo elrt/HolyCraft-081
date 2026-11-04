@@ -1,0 +1,2 @@
+class CreativeMode {MCCreativeHost015 *host;I32 delay;};
+U0 CreativeMode_Init(CreativeMode *,MCCreativeHost015 *);U0 CreativeMode_creativeDestroyBlock(CreativeMode *,I32,I32,I32,I32);U0 CreativeMode_startDestroyBlock(CreativeMode *,U0 *,I32,I32,I32,I32);U0 CreativeMode_continueDestroyBlock(CreativeMode *,I32,I32,I32,I32);U0 CreativeMode_stopDestroyBlock(CreativeMode *);Bool CreativeMode_isCreativeType(CreativeMode *);U0 CreativeMode_initAbilities(CreativeMode *,Abilities *);U0 CreativeMode_releaseUsingItem(CreativeMode *,U0 *);

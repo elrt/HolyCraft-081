@@ -1,0 +1,1 @@
+U0 *MobFactory_CreateMob(MCFactoryHost014 *,I32,U0 *);U8 *MobFactory_GetMobNameID(I32);U0 MobFactory_CacheInit(MCMobCache014 *,MCFactoryHost014 *);U0 MobFactory_CacheDestroy(MCMobCache014 *);U0 *MobFactory_getStaticTestMob(MCMobCache014 *,I32,U0 *);

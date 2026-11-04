@@ -1,0 +1,2 @@
+class XperiaPlayInput {KeyboardInput base;MCXperiaHost015 *host;Bool wasTouched,chatPressed;RectangleArea drawArea,touchArea;I32 pressedColor,normalColor;};
+U0 XperiaPlayInput_Init(XperiaPlayInput *,MCXperiaHost015 *,U0 *,I32 (*key)(U0 *,I32),U0 (*craft)(U0 *));U0 XperiaPlayInput_tick(XperiaPlayInput *,U0 *);U0 XperiaPlayInput_render(XperiaPlayInput *,F32);U0 XperiaPlayInput_onConfigChanged(XperiaPlayInput *,I32);

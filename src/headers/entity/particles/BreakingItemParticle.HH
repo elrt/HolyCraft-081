@@ -1,0 +1,1 @@
+class BreakingItemParticle {Particle base;I32 itemID;};U0 BreakingItemParticle_Init(BreakingItemParticle *,MCParticleHost011 *,I32,U8 *,I32);U0 BreakingItemParticle_init(Particle *,F32,F32,F32,F32,F32,F32,I32);U0 BreakingItemParticle_render(BreakingItemParticle *,F32,F32,F32,F32,F32,F32);

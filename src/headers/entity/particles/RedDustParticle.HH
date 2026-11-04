@@ -1,0 +1,1 @@
+class RedDustParticle {Particle base;F32 originalScale;};U0 RedDustParticle_Init(RedDustParticle *,MCParticleHost011 *,I32,U8 *);U0 RedDustParticle_init(Particle *,F32,F32,F32,F32,F32,F32,I32);U0 RedDustParticle_tick(Particle *);U0 RedDustParticle_render(RedDustParticle *,F32,F32,F32,F32,F32,F32);

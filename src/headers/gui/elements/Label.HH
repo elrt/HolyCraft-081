@@ -1,0 +1,1 @@
+class Label {GuiElement base;MCString text;I32 textColor,widthBase,heightBase;Bool fixedWidth,textShadow;I8 field_3A;};U0 Label_Init(Label *,MCGuiHost011 *,U8 *,I32,I32,I32,I32,Bool);U0 Label_render(Label *);U0 Label_setupPositions(Label *);U8 *Label_getText(Label *);U0 Label_setText(Label *,U8 *);U0 Label_setWidth(Label *,I32);U0 Label_Destroy(Label *);

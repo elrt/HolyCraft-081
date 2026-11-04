@@ -1,0 +1,1 @@
+class StoneSlabTile {SlabTile base;TextureUVCoordinateSet tex[10];};U0 StoneSlabTile_Init(StoneSlabTile *,MCTileHost012 *,I32,Bool);TextureUVCoordinateSet *StoneSlabTile_getTexture(StoneSlabTile *,I32,I32);I32 StoneSlabTile_getResource(StoneSlabTile *,I32);I32 StoneSlabTile_getSpawnResourcesAuxValue(StoneSlabTile *,I32);U8 *StoneSlabTile_name(I32);

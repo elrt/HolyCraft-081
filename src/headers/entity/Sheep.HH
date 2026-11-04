@@ -1,0 +1,3 @@
+// Batch023: entity/Sheep; explicit simulation ABI, see docs/BATCH023.md.
+class Sheep: MCBody023 {I32 eatAnimation;U8 data16;Bool baby;};
+U0 Sheep_Init(Sheep*,MCWorld023*);I32 Sheep_getColor(Sheep*);U0 Sheep_setColor(Sheep*,I32);Bool Sheep_isSheared(Sheep*);U0 Sheep_setSheared(Sheep*,Bool);I32 Sheep_getRandomSheepColor(Random*);F32 Sheep_getHeadEatAngleScale(Sheep*,F32);F32 Sheep_getHeadEatPositionScale(Sheep*,F32);U0 Sheep_ate(Sheep*);U0 Sheep_handleEntityEvent(Sheep*,I32);U0 Sheep_aiStep(Sheep*);Bool Sheep_interact(Sheep*,MCPlayer023*);U0 Sheep_save(Sheep*,CompoundTag*);U0 Sheep_load(Sheep*,CompoundTag*);

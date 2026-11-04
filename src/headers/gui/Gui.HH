@@ -1,0 +1,22 @@
+// Batch026 partial source API; not original C++ ABI.
+class Gui {Minecraft *minecraft;MCUIHost026 *host;MCUI025 *ui;MCVector messages;MCString nowPlaying,tip;I32 slots,ticks,nowPlayingLeft,slotToDrop,flashedSlot;F32 scale,invScale,flash,tipTimeLeft,slotDropCounter;F64 flashedAt;Bool inventoryDirty;};
+U0 Gui_Init(Gui *s,Minecraft *mc,MCUIHost026 *host,MCUI025 *ui,F32 scale);
+U0 Gui_Destroy(Gui *s);
+I32 Gui_itemCountItoa(U8 *out,I32 n);
+F32 Gui_cubeSmoothStep(F32 n,F32 unusedA,F32 unusedB);
+F32 Gui_floorAlignToScreenPixel(Gui *s,F32 n);
+I32 Gui_getNumSlots(Gui *s);
+U0 Gui_onConfigChanged(Gui *s,I32 width,Bool touch,Bool joypad,F32 guiScale,F32 norm);
+U0 Gui_getRectangleArea(Gui *s,I32 side,RectangleArea *out);
+I32 Gui_getSlotIdAt(Gui *s,I32 x,I32 y);
+I32 Gui_getSlotPos(Gui *s,I32 slot,I32 *x,I32 *y);
+U0 Gui_addMessage(Gui *s,MCString *author,MCString *message,I32 ticks);
+U0 Gui_displayClientMessage(Gui *s,MCString *message);
+U0 Gui_flashSlot(Gui *s,I32 slot);
+U0 Gui_showTipMessage(Gui *s,MCString *text);
+U0 Gui_setNowPlaying(Gui *s,MCString *text);
+U0 Gui_handleClick(Gui *s,I32 button,I32 x,I32 y);
+U0 Gui_handleKeyPressed(Gui *s,I32 key);
+U0 Gui_tickItemDrop(Gui *s,Bool down,I32 x,I32 y);
+U0 Gui_tick(Gui *s);
+U0 Gui_renderChatMessages(Gui *s,Bool hide);
