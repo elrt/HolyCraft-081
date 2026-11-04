@@ -1,5 +1,8 @@
 # MCPE 0.8.1 → HolyC
 
+> ⚠️ **Early and very buggy.** Expect crashes, rendering glitches, broken mechanics and differences
+> from the original game. Back up your worlds before opening them. Bug reports (with `crash.log`) are welcome.
+> 
 A port of **Minecraft: Pocket Edition 0.8.1** (C++) to **HolyC**, compiled to a native
 Linux x86_64 executable with [hcc](https://github.com/Jamesbarford/holyc-lang).
 Not a TempleOS port: it runs on ordinary Linux.
